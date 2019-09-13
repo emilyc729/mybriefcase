@@ -3,12 +3,6 @@ from django.urls import reverse
 from datetime import date
 from django.contrib.auth.models import User
 
-#Photo Model
-class Photo(models.Model):
-    url = models.CharField(max_length=200)  #photo url
-
-    def __str__(self):
-        return f'{self.url}'
 
 #Portfolio Model
 class Portfolio(models.Model):
@@ -16,7 +10,7 @@ class Portfolio(models.Model):
     profile_link = models.CharField(max_length=100) #like a LinkedIn or SocialMedia Link
     github_link = models.CharField(max_length=100) #main github page that shows all repositories
     about_me = models.TextField(max_length=800) #description about user: interests/hobbies/goals
-    portfolio_photo = models.OneToOneField(Photo, on_delete = models.CASCADE)
+    
 
     def __str__(self):
         return f'{self.id} portfolio'
@@ -33,7 +27,15 @@ class Project(models.Model):
     project_link = models.CharField(max_length=100) #project's github link
     description = models.TextField(max_length=300)  #dmodelsate completed project
     date = models.DateField()
-    project_photo = models.OneToOneField(Photo, on_delete = models.CASCADE)
 
     def __str__(self):
         return f'{self.portfolio.user} Project: {self.id} {self.project}'
+
+#Photo Model
+class Photo(models.Model):
+    portfolio_photo = models.OneToOneField(Portfolio, on_delete = models.CASCADE)
+    project_photo = models.OneToOneField(Project, on_delete = models.CASCADE)
+    url = models.CharField(max_length=200)  #photo url
+
+    def __str__(self):
+        return f'{self.url}'
