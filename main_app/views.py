@@ -26,7 +26,7 @@ class PortfolioCreate(CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-def add_photo(request):
+def add_photo(request, portfolio_id):
     photo_file = request.FILES.get('photo-file', None)
     # make sure a file is uploaded
     if photo_file:
@@ -36,11 +36,11 @@ def add_photo(request):
         try:
             s3.upload_fileobj(photo_file, BUCKET, key)
             url = f'{S3_BASE_URL}{BUCKET}/{key}'
-            photo = Photo(url=url)
+            photo = Photo(url=url, portfolio_id=portfolio_id)
             photo.save()
         except:
             print('An error occurred uploading file to s3')
-    return redirect('' )
+    return redirect('detail', portfolio_id=portfolio_id)
 
 
 #sign up view
