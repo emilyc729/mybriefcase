@@ -16,6 +16,10 @@ class PortfolioCreate(CreateView):
     fields = ['profile_link', 'github_link', 'about_me']
     success_url = '/'
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
 #sign up view
 def signup(request):
     error_message = ''
