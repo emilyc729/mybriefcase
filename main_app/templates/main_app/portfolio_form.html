@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if object %}
+    <h1>Edit <span class="teal-text">{{object.name}}</span></h1>
+  {% else %}
+    <h1>Add Portfolio</h1>
+  {% endif %}
+<form method="post" action="">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="form-group">
+        {{ field.label_tag }} {{ field }}
+        <br>
+        {{ field.help_text }}
+        {{ field.errors }}
+    </div>
+    {% endfor %}
+
+    <input type="submit" class="btn btn-outline-primary" value="Submit">
+</form>
+
+{% endblock %}

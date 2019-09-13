@@ -8,6 +8,14 @@ from django.contrib.auth.forms import UserCreationForm
 def home(request):
     return render(request, 'home.html')
 
+class PortfolioPage(ListView):
+    model = Portfolio
+
+class PortfolioCreate(CreateView):
+    model = Portfolio
+    fields = ['profile_link', 'github_link', 'about_me']
+    success_url = '/'
+
 #sign up view
 def signup(request):
     error_message = ''
