@@ -20,4 +20,11 @@
     <input type="submit" class="btn btn-outline-primary" value="Submit">
 </form>
 
+<form action="{% url 'add_photo' %}" enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    <input type="file" name="photo-file">
+    <br>
+    <input type="sumbit" value="Upload Photo">
+</form>
+
 {% endblock %}
