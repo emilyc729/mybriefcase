@@ -36,6 +36,7 @@
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                     </form>
                 </li>
+                {% if user.is_authenticated %}
                 <div class="btn-group">
                     <button type="button" class="btn btn-secondary" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
@@ -44,25 +45,28 @@
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="">Home</a>
                         <a class="dropdown-item" href="">My Portfolio</a>
+                        <a class="dropdown-item" href="{% url 'portfolio_create' %}">
+                            <i class="fas fa-plus"></i> Portfolio</a>
                         <a class="dropdown-item" href="">
                             <i class="fas fa-edit"></i> Portfolio</a>
                         <a class="dropdown-item" href="" >
                             <i class="fas fa-plus"></i> Project</a>
-                        <a class="dropdown-item" href="">
+                        <a class="dropdown-item" href="{% url 'logout' %}">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i
                                     class="fas fa-sign-out-alt"></i> Logout</button>
                         </a>
                     </div>
                 </div>
-         
+                {% else %}
                 <li class="nav-item ml-3">
-                    <a href=""><button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">
+                    <a href="{% url 'signup' %}"><button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">
                             <i class="fas fa-user-plus"></i> Sign Up</button></a>
                 </li>
                 <li class="nav-item ml-3">
-                        <a href=""><button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">
+                        <a href="{% url 'login' %}"><button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">
                                 <i class="fas fa-sign-in-alt"></i> Login</button></a>
                     </li>
+                {% endif %}
 
             </ul>
 
