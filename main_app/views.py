@@ -4,6 +4,12 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView, ListView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+# photos
+import uuid
+import boto3
+
+S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
+BUCKET = 'dogcollector'
 
 def home(request):
     return render(request, 'home.html')
@@ -14,11 +20,28 @@ class PortfolioPage(ListView):
 class PortfolioCreate(CreateView):
     model = Portfolio
     fields = ['profile_link', 'github_link', 'about_me']
-    success_url = '/'
+    success_url = 'portfolio'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+def add_photo(request):
+    photo_file = request.FILES.get('photo-file', None)
+    # make sure a file is uploaded
+    if photo_file:
+        s3 = boto3.client('s3')
+        # random # + file extension(.jpg, .png)
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            url = f'{S3_BASE_URL}{BUCKET}/{key}'
+            photo = Photo(url=url)
+            photo.save()
+        except:
+            print('An error occurred uploading file to s3')
+    return redirect('' )
+
 
 #sign up view
 def signup(request):
