@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>portfolio</h1>
+
+{% for p in portfolio_list %}
+    {{p.id}}
+    {{p.profile_link}}
+    {{p.github_link}}
+    {{p.about_me}}
+{% endfor %}
+
+
+{% endblock %}
