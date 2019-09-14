@@ -38,12 +38,13 @@
                 </li>
                 {% if user.is_authenticated %}
                 <div class="btn-group">
-                    <button type="button" class="btn btn-secondary" data-toggle="dropdown" aria-haspopup="true"
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
                         <i class="fas fa-bars"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="">Home</a>
+                        <a class="dropdown-item" href="{% url 'user_profile' user.id %}">User Profile</a>
                         <a class="dropdown-item" href="{% url 'portfolio' %}">My Portfolio</a>
                         <a class="dropdown-item" href="{% url 'portfolio_create' %}">
                             <i class="fas fa-plus"></i> Portfolio</a>

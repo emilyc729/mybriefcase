@@ -3,5 +3,8 @@
 
 <h1>Carousel</h1>
 <h1>Portfolio Links</h1>
-
+{% for user in users %}
+<p>{{user.first_name}} {{user.last_name}}<p>
+    <a href="{% url 'user_profile' user.id %}"><button type="button" class="btn btn-outline-primary">View Portfolio</button></a>
+{% endfor %}
 {% endblock %}
