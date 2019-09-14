@@ -3,8 +3,8 @@
 
 <h1>portfolio</h1>
 
-
-{% for p in portfolio_list %}
+{% if user.portfolio != '' %}
+{% for p in portfolios %}
 <a href="{% url 'portfolio_detail' p.id %}">
 <div>
         {{p.id}}
@@ -14,6 +14,6 @@
 </div>
 </a>
 {% endfor %}
-
+{% endif %}
 
 {% endblock %}

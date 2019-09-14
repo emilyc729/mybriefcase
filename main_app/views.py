@@ -21,10 +21,11 @@ def user_profile(request, user_id):
     user = User.objects.get(id=user_id)
     return render(request, 'main_app/user_profile.html', {'user': user})
 
-class PortfolioPage(ListView):
+class PortfolioPage(LoginRequiredMixin, ListView):
     model = Portfolio
+    context_object_name = 'portfolios'
 
-class PortfolioCreate(CreateView):
+class PortfolioCreate(LoginRequiredMixin, CreateView):
     model = Portfolio
     fields = ['profession', 'profile_link', 'github_link', 'about_me']
     success_url = '/portfolio/'
@@ -33,10 +34,10 @@ class PortfolioCreate(CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-class PortfolioDetail(DetailView):
+class PortfolioDetail(LoginRequiredMixin, DetailView):
     model = Portfolio
     
-
+@login_required
 def add_photo(request, portfolio_id):
     photo_file = request.FILES.get('photo-file', None)
     portfolio = Portfolio.objects.get(id=portfolio_id)
@@ -76,5 +77,6 @@ def signup(request):
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+
 
 
