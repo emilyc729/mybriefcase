@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
-from .models import Portfolio, Photo
+from .models import User, Portfolio, Photo
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView, ListView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 # photos
 import uuid
 import boto3
@@ -12,14 +14,19 @@ S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
 BUCKET = 'dogcollector-ec'
 
 def home(request):
-    return render(request, 'home.html')
+    users = User.objects.all()
+    return render(request, 'home.html', {'users': users})
+
+def user_profile(request, user_id):
+    user = User.objects.get(id=user_id)
+    return render(request, 'main_app/user_profile.html', {'user': user})
 
 class PortfolioPage(ListView):
     model = Portfolio
 
 class PortfolioCreate(CreateView):
     model = Portfolio
-    fields = ['profile_link', 'github_link', 'about_me']
+    fields = ['profession', 'profile_link', 'github_link', 'about_me']
     success_url = '/portfolio/'
 
     def form_valid(self, form):
