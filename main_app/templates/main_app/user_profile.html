@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="jumbotron">
+    <h1 class="display-4">{{user.first_name}} {{user.last_name}} <small class="text-muted">({{user.username}})</small></h1>
+    <h4>Profession: {{user.portfolio.profession}}</h4>
+    <h4>About Me: {{user.portfolio.about_me}}</h4>
+    <p>Email: {{user.email}}</p>
+    <p>Profile Link: <a href="{{user.portfolio.profile_link}}">{{user.portfolio.profile_link}}</a></p>
+    <p>Github Link: <a href="{{user.portfolio.github_link}}">{{user.portfolio.github_link}}</a></p>
+    <img class="responsive-img" src="{{user.portfolio.photo_url}}">
+</div>
+
+{% endblock %}
