@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 #Portfolio Model
 class Portfolio(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)
+    profession = models.CharField(max_length=20, default="")
     profile_link = models.CharField(max_length=100) #like a LinkedIn or SocialMedia Link
     github_link = models.CharField(max_length=100) #main github page that shows all repositories
     about_me = models.TextField(max_length=800) #description about user: interests/hobbies/goals
