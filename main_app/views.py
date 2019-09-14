@@ -9,7 +9,7 @@ import uuid
 import boto3
 
 S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
-BUCKET = 'dogcollector'
+BUCKET = 'dogcollector-ec'
 
 def home(request):
     return render(request, 'home.html')
@@ -26,21 +26,30 @@ class PortfolioCreate(CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
+class PortfolioDetail(DetailView):
+    model = Portfolio
+    
+
 def add_photo(request, portfolio_id):
     photo_file = request.FILES.get('photo-file', None)
+    portfolio = Portfolio.objects.get(id=portfolio_id)
+    print(portfolio)
     # make sure a file is uploaded
     if photo_file:
         s3 = boto3.client('s3')
+ 
         # random # + file extension(.jpg, .png)
         key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
         try:
             s3.upload_fileobj(photo_file, BUCKET, key)
             url = f'{S3_BASE_URL}{BUCKET}/{key}'
-            photo = Photo(url=url, portfolio_id=portfolio_id)
+            photo = Photo(url=url, portfolio_photo_id=portfolio_id, project_photo_id='')
+
+            #print(photo.save())
             photo.save()
         except:
             print('An error occurred uploading file to s3')
-    return redirect('detail', portfolio_id=portfolio_id)
+    return redirect(portfolio)
 
 
 #sign up view

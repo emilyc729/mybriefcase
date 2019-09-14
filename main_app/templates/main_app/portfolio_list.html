@@ -3,11 +3,16 @@
 
 <h1>portfolio</h1>
 
+
 {% for p in portfolio_list %}
-    {{p.id}}
+<a href="{% url 'portfolio_detail' p.id %}">
+<div>
+        {{p.id}}
     {{p.profile_link}}
     {{p.github_link}}
     {{p.about_me}}
+</div>
+</a>
 {% endfor %}
 
 
