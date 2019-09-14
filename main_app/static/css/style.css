@@ -6,3 +6,7 @@ main.container-fluid {
 .btn-group {
     margin-left: 30px;
 }
+
+.title {
+    text-align: center;
+}
