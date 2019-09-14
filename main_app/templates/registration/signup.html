@@ -16,23 +16,27 @@
             <label for="last_name">Last Name:</label>
             <input class="form-control" type="text" name="last_name" required>
         </div>
-        <div class="col-md-3 mb-3">
+        <div class="col-md-4 mb-3">
             <label for="email">Email:</label>
             <input class="form-control" type="email" name="email" required>
         </div>
     </div>
 
 
-
+    <div class="form-row">
+            <div class="col-md-8 mb-3">
     {% for field in form %}
-    <div class="form-group">
-        {{ field.label_tag }} {{ field }}
-        <br>
+               
+            {{field.label_tag}}    {{field}}
+
+  
         {{ field.help_text }}
         {{ field.errors }}
-    </div>
+    
     {% endfor %}
-
+   
+</div>
+    </div>
     <input type="submit" class="btn btn-outline-primary" value="Sign Up">
 </form>
 
