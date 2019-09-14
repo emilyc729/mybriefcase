@@ -20,7 +20,7 @@ class PortfolioPage(ListView):
 class PortfolioCreate(CreateView):
     model = Portfolio
     fields = ['profile_link', 'github_link', 'about_me']
-    success_url = 'portfolio'
+    success_url = '/portfolio/'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -43,10 +43,9 @@ def add_photo(request, portfolio_id):
         try:
             s3.upload_fileobj(photo_file, BUCKET, key)
             url = f'{S3_BASE_URL}{BUCKET}/{key}'
-            photo = Photo(url=url, portfolio_photo_id=portfolio_id, project_photo_id='')
-
-            #print(photo.save())
-            photo.save()
+            portfolio.photo_url = url
+            print(f'photo url : {portfolio.photo_url}')
+            portfolio.update(update_fields=['photo_url'])
         except:
             print('An error occurred uploading file to s3')
     return redirect(portfolio)
