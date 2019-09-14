@@ -9,7 +9,13 @@
     <p>Email: {{user.email}}</p>
     <p>Profile Link: <a href="{{user.portfolio.profile_link}}">{{user.portfolio.profile_link}}</a></p>
     <p>Github Link: <a href="{{user.portfolio.github_link}}">{{user.portfolio.github_link}}</a></p>
-    <img class="responsive-img" src="{{user.portfolio.photo_url}}">
+    <img class="responsive-img mb-4" src="{{user.portfolio.photo_url}}" alt="Image">
+    <form method="POST" action="{% url 'add_photo' user.portfolio.id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="photo-file">
+        <br>
+        <input type="submit" class="btn btn-outline-success mt-2" value="Upload Photo">
+    </form>
 </div>
 <div class="container">
     <h1 class="title">Projects</h1>
