@@ -25,17 +25,22 @@ class PortfolioPage(LoginRequiredMixin, ListView):
     model = Portfolio
     context_object_name = 'portfolios'
 
+class PortfolioDetail(LoginRequiredMixin, DetailView):
+    model = Portfolio
+
 class PortfolioCreate(LoginRequiredMixin, CreateView):
     model = Portfolio
-    fields = ['profession', 'profile_link', 'github_link', 'about_me']
+    fields = ['profession', 'profile_link', 'github_link', 'about_me', 'photo_url']
     success_url = '/portfolio/'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-class PortfolioDetail(LoginRequiredMixin, DetailView):
+class PortfolioUpdate(LoginRequiredMixin, UpdateView):
     model = Portfolio
+    fields = ['profession', 'profile_link', 'github_link', 'about_me']
+
     
 @login_required
 def add_photo(request, portfolio_id):
