@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import User, Portfolio, Photo
+from .models import User, Portfolio
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView, ListView
 from django.contrib.auth import login
