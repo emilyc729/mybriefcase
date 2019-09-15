@@ -3,4 +3,13 @@
 
 <h1>project list</h1>
 
+{% for project in project_list %}
+    <a href="{% url 'projects_detail' project.id %}">
+        <div>
+            <div>
+                {{ project.project_name }}
+            </div>
+        </div>
+    </a>
+
 {% endblock %}
