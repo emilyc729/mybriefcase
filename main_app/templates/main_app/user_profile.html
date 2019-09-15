@@ -10,7 +10,13 @@
     <p>Email: {{user.email}}</p>
     <p>Profile Link: <a href="{{user.portfolio.profile_link}}">{{user.portfolio.profile_link}}</a></p>
     <p>Github Link: <a href="{{user.portfolio.github_link}}">{{user.portfolio.github_link}}</a></p>
-    <img class="responsive-img mb-4" src="{{user.portfolio.photo_url}}" alt="Image">
+    
+    {% if user.portfolio.photo_url %}
+    <img class="responsive-img mb-4" src="{{user.portfolio.photo_url}}" alt="Avatar">
+    {% else %}
+    <img class="responsive-img mb-4" src="" alt="Avatar">
+    {% endif %}
+
     {% if request.user == user %}
     <form method="POST" action="{% url 'portfolio_add_photo' user.portfolio.id %}" enctype="multipart/form-data">
         {% csrf_token %}
@@ -18,6 +24,7 @@
         <br>
         <input type="submit" class="btn btn-outline-success mt-2" value="Upload Photo">
     </form>
+    <a class="btn btn-outline-danger mt-2" href="{% url 'portfolio_delete_photo' user.portfolio.id %}">Delete Photo</a>
     {% endif %}
 </div>
 <div class="container">
@@ -34,8 +41,8 @@
                 <div class="card-footer d-flex justify-content-between">
                     <small class="text-muted">Last updated 3 mins ago</small>
                     <div>
-                        <a href=""><button class="btn btn-outline-info">Edit</button></a>
-                        <a href=""><button class="btn btn-outline-danger">Delete</button></a>
+                        <a class="btn btn-outline-info" href="">Edit</a>
+                        <a class="btn btn-outline-danger" href="">Delete</a>
                     </div>
                 </div>
             </div>
