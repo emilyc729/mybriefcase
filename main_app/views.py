@@ -79,4 +79,38 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 
+class ProjectList(ListView):
+    model = Project 
+
+class ProjectDetail(DetailView):
+    model = Project 
+
+class ProjectCreate(CreateView):
+    model = Project 
+    fields = [
+        'portfolio', 
+        'project_name', 
+        'technologies', 
+        'deployed_link', 
+        'project_link', 
+        'description', 
+        'date'
+    ]
+
+class ProjectUpdate(UpdateView):
+    model = Project 
+    fields = [
+        'project_name',
+        'technologies',
+        'deployed_link',
+        'project_link',
+        'description',
+        'date'
+    ]
+
+class ProjectDelete(DeleteView):
+    model = Project
+    success_url = '/projects/'
+
+
 
