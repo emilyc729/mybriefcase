@@ -46,7 +46,7 @@ class PortfolioUpdate(LoginRequiredMixin, UpdateView):
 def portfolio_add_photo(request, portfolio_id):
     photo_file = request.FILES.get('photo-file', None)
     portfolio = Portfolio.objects.get(id=portfolio_id)
-    print(portfolio)
+    user = User.objects.get(id=request.user.id).id
     # make sure a file is uploaded
     if photo_file:
         s3 = boto3.client('s3')
@@ -60,7 +60,15 @@ def portfolio_add_photo(request, portfolio_id):
             portfolio.save()
         except:
             print('An error occurred uploading file to s3')
-    return redirect(portfolio)
+    return redirect('user_profile', user)
+
+@login_required
+def portfolio_delete_photo(request, portfolio_id):
+    user = User.objects.get(id=request.user.id).id
+    portfolio = Portfolio.objects.get(id=portfolio_id)
+    portfolio.photo_url = ''
+    portfolio.save()
+    return redirect('user_profile', user)
 
 
 #sign up view
