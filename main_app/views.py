@@ -27,16 +27,6 @@ def user_profile(request, user_id):
     print(projects)
     return render(request, 'main_app/user_profile.html', {'user': user, 'projects':projects})
 
-
-class PortfolioPage(LoginRequiredMixin, ListView):
-    model = Portfolio
-    context_object_name = 'portfolios'
-
-
-class PortfolioDetail(LoginRequiredMixin, DetailView):
-    model = Portfolio
-
-
 class PortfolioCreate(LoginRequiredMixin, CreateView):
     model = Portfolio
     fields = ['profession', 'profile_link', 'github_link', 'about_me']
@@ -103,14 +93,6 @@ def signup(request):
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
-
-
-class ProjectList(ListView):
-    model = Project
-
-
-class ProjectDetail(DetailView):
-    model = Project
 
 
 class ProjectCreate(CreateView):

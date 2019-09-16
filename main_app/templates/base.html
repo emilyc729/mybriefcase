@@ -44,8 +44,7 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="{% url 'home' %}">Home</a>
-                        <a class="dropdown-item" href="{% url 'user_profile' request.user.id %}">User Profile</a>
-                        <a class="dropdown-item" href="{% url 'portfolio' %}">My Portfolio</a>
+                        <a class="dropdown-item" href="{% url 'user_profile' request.user.id %}">My Portfolio</a>
                         {% if request.user.portfolio == '' %}
                         <a class="dropdown-item" href="{% url 'portfolio_create' %}">
                             <i class="fas fa-plus"></i> Portfolio</a>
@@ -55,8 +54,6 @@
                         {% endif %}
                         <a class="dropdown-item" href="{% url 'projects_create' %}" >
                             <i class="fas fa-plus"></i> Project</a>
-                            <a class="dropdown-item" href="{% url 'projects_index' %}" >
-                                     Projects List</a>
                         <a class="dropdown-item" href="{% url 'logout' %}">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i
                                     class="fas fa-sign-out-alt"></i> Logout</button>
