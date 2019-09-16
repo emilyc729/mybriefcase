@@ -1,12 +1,123 @@
+:root {
+	--primary: #7f170e;
+	--secondary: hsla(31, 64%, 90%, 1);
+	--pink: hsla(0, 64%, 82%, 0.21);
+	--green: #8da54a;
+	--orange: #e1772e;
+	--offwhite:
+}
 
 main.container-fluid {
     padding: 0;
 }
 
-.btn-group {
-    margin-left: 30px;
-}
 
 .title {
     text-align: center;
 }
+
+
+
+
+/* Element styles (inputs, buttons, jumbotron*/
+input {
+    border: 1px solid aquamarine;
+    border-radius: 2px;
+}
+
+.btn {
+    padding: 5px 20px;
+}
+
+.btn-primary {
+    background-color: olivedrab;
+    border: 1px solid aquamarine;
+}
+
+.btn-primary:hover {
+    background-color: mediumaquamarine;
+    border: 1px solid aquamarine;
+}
+
+
+.btn-group {
+    margin-left: 30px;
+}
+
+.jumbotron {
+    background-color: mintcream;
+}
+
+
+
+/* Font Styles */
+
+h1 {
+    padding-bottom: 20px;
+    font-family: 'Manjari', serif;
+    font-weight: bold;
+}
+
+h3 {
+    font-family: 'Manjari', serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+
+
+/* Nav Styles */
+#nav-components {
+    flex-direction: row;
+}
+
+
+
+
+
+/* Home page */
+#home-portfolio-links {
+    border: 1px solid blue
+}
+
+#login-container {
+    display: flex;
+    justify-content: center;
+}
+
+
+.carousel-inner {
+    background-color: white;
+}
+
+
+
+
+.carousel-item img {
+    object-fit: scale-down;
+    max-height: 400px;
+}
+
+
+
+.form-group input{
+    width: 100%;
+}
+
+.carousel-control-prev-icon {
+    outline: grey;
+    padding: 3px;
+}
+
+/* .arrow-bg {
+    background-color: black;
+    padding: 3px 4px;
+    border-radius: 
+
+} */
+
+
+
+
+/* Sign Up Page */
