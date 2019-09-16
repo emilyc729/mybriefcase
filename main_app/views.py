@@ -173,9 +173,16 @@ def projects_delete_photo(request, projects_id):
     return redirect('user_profile', user)
 
 def search(request):
-    search_content = request.GET.get('content')
-    option = request.GET.get('option')
-    error_msg = ''
-    if not content:
-        error_msg = 'Please enter search term'
-        return render(request, 'main_app/user_profile')
+    pass
+    # search_content = request.GET.get('content')
+    # option = request.GET.get('option')
+    # error_msg = ''
+    # if not content:
+    #     error_msg = 'Please enter search term'
+    #     return render(request, 'main_app/user_profile')
+
+    # search by 📔 
+    # get technologies
+    # then get profolio objects
+    # projects = Project.objects.filter(contain: technologies)
+    # for project in projects
