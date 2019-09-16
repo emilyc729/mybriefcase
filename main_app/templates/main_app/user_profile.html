@@ -62,8 +62,8 @@
                     <p class="text-muted">Date Created: {{p.date}}</p>
                     {% if request.user == user %}
                     <div>
-                        <a href=""><button class="btn btn-outline-info">Edit</button></a>
-                        <a href=""><button class="btn btn-outline-danger">Delete</button></a>
+                        <a href="{% url 'projects_update' p.id %}"><button class="btn btn-outline-info">Edit</button></a>
+                        <a href="{% url 'projects_delete' p.id %}"><button class="btn btn-outline-danger">Delete</button></a>
                     </div>
                     {% endif %}
                 </div>

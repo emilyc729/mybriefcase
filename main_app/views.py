@@ -44,6 +44,10 @@ class PortfolioUpdate(LoginRequiredMixin, UpdateView):
     model = Portfolio
     fields = ['profession', 'profile_link', 'github_link', 'about_me']
 
+    def get_success_url(self):
+        user_id = self.request.user.id
+        return reverse('user_profile', kwargs={'user_id': user_id})
+
 
 @login_required
 def portfolio_add_photo(request, portfolio_id):
@@ -126,9 +130,14 @@ class ProjectUpdate(UpdateView):
         'date'
     ]
 
+    def get_success_url(self):
+        user_id = self.request.user.id
+        return reverse('user_profile', kwargs={'user_id': user_id})
+
 
 class ProjectDelete(DeleteView):
     model = Project
+    template_name = "main_app/projects_confirm_delete.html"
 
     def get_success_url(self):
         user_id = self.request.user.id
