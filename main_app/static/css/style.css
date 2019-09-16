@@ -10,3 +10,8 @@ main.container-fluid {
 .title {
     text-align: center;
 }
+
+#home-project-container {
+    margin: 100px;
+    padding: 200px;
+}
