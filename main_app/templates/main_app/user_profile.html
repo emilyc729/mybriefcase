@@ -32,6 +32,7 @@
     <h1 class="title">Projects</h1>
     
     <div class="row">
+        {% if projects %}
         {% for p in projects %}
         <div class="col-md-6 mb-4">
             <div class="card">
@@ -70,6 +71,15 @@
             </div>
         </div>
         {% endfor %}
+            {% else %}
+            <h2>'{{user}}' has no projects yet. 😢 </h2>
+            {% if request.user == user %}
+            <div class="project-create">
+            <a class="btn btn-outline-primary" href="{% url 'projects_create' %}">
+                    <i class="fas fa-plus"></i> Project</a>
+            </div>
+            {% endif %}
+        {% endif %}
 
     </div>
 </div>
