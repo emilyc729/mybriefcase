@@ -9,6 +9,7 @@ urlpatterns = [
     path('portfolio/<int:pk>/', views.PortfolioDetail.as_view(), name='portfolio_detail'),
     path('portfolio/<int:portfolio_id>/add_photo/', views.add_photo, name='add_photo'),
     path('accounts/signup', views.signup, name='signup'),
+    # need to test path 
     path('projects/', views.ProjectList.as_view(), name='projects_index'),
     path('projects/<int:pk>/', views.ProjectDetail.as_view(), name='projects_detail'),
     path('projects/create/', views.ProjectCreate.as_view(), name='projects_create'),
