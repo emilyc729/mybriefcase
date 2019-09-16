@@ -31,5 +31,5 @@ class Project(models.Model):
     photo_url = models.CharField(max_length=200, default="")
 
     def __str__(self):
-        return f'{self.portfolio.user} Project: {self.id} {self.project}'
+        return f'{self.portfolio.user} Project: {self.id} {self.project_name}'
 
