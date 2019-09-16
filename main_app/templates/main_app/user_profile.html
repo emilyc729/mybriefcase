@@ -16,7 +16,8 @@
         <br>
         <input type="submit" class="btn btn-outline-success mt-2" value="Upload Photo">
     </form>
-    <form method="POST" action="">
+    <form method="POST" action="{% url 'projects_create' %}">
+        {% csrf_token %}
         <input type="submit" value="Add Project">
     </form>
 </div>
