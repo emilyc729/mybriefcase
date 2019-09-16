@@ -99,7 +99,7 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 
-class ProjectCreate(CreateView):
+class ProjectCreate(LoginRequiredMixin, CreateView):
     model = Project
     fields = [
         'project_name',
@@ -119,7 +119,7 @@ class ProjectCreate(CreateView):
         return super().form_valid(form)
 
 
-class ProjectUpdate(UpdateView):
+class ProjectUpdate(LoginRequiredMixin, UpdateView):
     model = Project
     fields = [
         'project_name',
@@ -135,7 +135,7 @@ class ProjectUpdate(UpdateView):
         return reverse('user_profile', kwargs={'user_id': user_id})
 
 
-class ProjectDelete(DeleteView):
+class ProjectDelete(LoginRequiredMixin, DeleteView):
     model = Project
     template_name = "main_app/projects_confirm_delete.html"
 
