@@ -6,6 +6,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse
 # photos
 import uuid
 import boto3
@@ -13,35 +14,47 @@ import boto3
 S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
 BUCKET = 'dogcollector-ec'
 
+
 def home(request):
     users = User.objects.all()
     return render(request, 'home.html', {'users': users})
 
+
 def user_profile(request, user_id):
     user = User.objects.get(id=user_id)
-    return render(request, 'main_app/user_profile.html', {'user': user})
+    portfolio_id = user.id
+    projects = Project.objects.filter(portfolio_id=portfolio_id)
+    print(projects)
+    return render(request, 'main_app/user_profile.html', {'user': user, 'projects':projects})
+
 
 class PortfolioPage(LoginRequiredMixin, ListView):
     model = Portfolio
     context_object_name = 'portfolios'
 
+
 class PortfolioDetail(LoginRequiredMixin, DetailView):
     model = Portfolio
+
 
 class PortfolioCreate(LoginRequiredMixin, CreateView):
     model = Portfolio
     fields = ['profession', 'profile_link', 'github_link', 'about_me']
-    success_url = '/portfolio/'
+
+    def get_success_url(self):
+        user_id = self.request.user.id
+        return reverse('user_profile', kwargs={'user_id': user_id})
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
+
 class PortfolioUpdate(LoginRequiredMixin, UpdateView):
     model = Portfolio
     fields = ['profession', 'profile_link', 'github_link', 'about_me']
 
-    
+
 @login_required
 def portfolio_add_photo(request, portfolio_id):
     photo_file = request.FILES.get('photo-file', None)
@@ -50,9 +63,9 @@ def portfolio_add_photo(request, portfolio_id):
     # make sure a file is uploaded
     if photo_file:
         s3 = boto3.client('s3')
- 
         # random # + file extension(.jpg, .png)
-        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        key = uuid.uuid4().hex[:6] + \
+                         photo_file.name[photo_file.name.rfind('.'):]
         try:
             s3.upload_fileobj(photo_file, BUCKET, key)
             url = f'{S3_BASE_URL}{BUCKET}/{key}'
@@ -61,6 +74,7 @@ def portfolio_add_photo(request, portfolio_id):
         except:
             print('An error occurred uploading file to s3')
     return redirect('user_profile', user)
+
 
 @login_required
 def portfolio_delete_photo(request, portfolio_id):
@@ -71,7 +85,7 @@ def portfolio_delete_photo(request, portfolio_id):
     return redirect('user_profile', user)
 
 
-#sign up view
+# sign up view
 def signup(request):
     error_message = ''
     if request.method == 'POST':
@@ -90,34 +104,17 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
-def assoc_project(request, portfolio_id, project_id):
-    Portfolio.objects.get(id=portfolio_id).projects.add(project_id)
-    return redirect('detail', portfolio_id=portfolio_id)
-
-def unassoc_project(request, portfolio_id, project_id):
-    Portfolio.objects.get(id=portfolio_id).projects.remove(project_id)
-    return redirect('detail', portfolio_id=portfolio_id)
 
 class ProjectList(ListView):
-    model = Project 
+    model = Project
+
 
 class ProjectDetail(DetailView):
-    model = Project 
+    model = Project
+
 
 class ProjectCreate(CreateView):
-    model = Project 
-    fields = [
-        'portfolio', 
-        'project_name', 
-        'technologies', 
-        'deployed_link', 
-        'project_link', 
-        'description', 
-        'date'
-    ]
-
-class ProjectUpdate(UpdateView):
-    model = Project 
+    model = Project
     fields = [
         'project_name',
         'technologies',
@@ -127,9 +124,59 @@ class ProjectUpdate(UpdateView):
         'date'
     ]
 
+    def get_success_url(self):
+        user_id = self.request.user.id
+        return reverse('user_profile', kwargs={'user_id': user_id})
+
+    def form_valid(self, form):
+        form.instance.portfolio = self.request.user.portfolio
+        return super().form_valid(form)
+
+
+class ProjectUpdate(UpdateView):
+    model = Project
+    fields = [
+        'project_name',
+        'technologies',
+        'deployed_link',
+        'project_link',
+        'description',
+        'date'
+    ]
+
+
 class ProjectDelete(DeleteView):
     model = Project
-    success_url = '/projects/'
+
+    def get_success_url(self):
+        user_id = self.request.user.id
+        return reverse('user_profile', kwargs={'user_id': user_id})
+
+@login_required
+def projects_add_photo(request, projects_id):
+    photo_file = request.FILES.get('photo-file', None)
+    projects = Project.objects.get(id=projects_id)
+    user = User.objects.get(id=request.user.id).id
+    # make sure a file is uploaded
+    if photo_file:
+        s3 = boto3.client('s3')
+        # random # + file extension(.jpg, .png)
+        key = uuid.uuid4().hex[:6] + \
+                         photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            url = f'{S3_BASE_URL}{BUCKET}/{key}'
+            projects.photo_url = url
+            projects.save()
+        except:
+            print('An error occurred uploading file to s3')
+    return redirect('user_profile', user)
 
 
-
+@login_required
+def projects_delete_photo(request, projects_id):
+    user = User.objects.get(id=request.user.id).id
+    projects = Project.objects.get(id=projects_id)
+    projects.photo_url = ''
+    projects.save()
+    return redirect('user_profile', user)

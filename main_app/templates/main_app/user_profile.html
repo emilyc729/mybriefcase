@@ -28,35 +28,38 @@
     {% endif %}
 </div>
 <div class="container">
+    
     <h1 class="title">Projects</h1>
+    
     <div class="row">
-        <div class="col-md-6">
+        {% for p in projects %}
+        <div class="col-md-6 mb-4">
             <div class="card">
-                <img src="..." class="card-img-top" alt="...">
+                    {% if user.portfolio.photo_url %}
+                    <img class="responsive-img card-img-top" src="{{p.photo_url}}" alt="Project Photo">
+                    {% else %}
+                    <img class="responsive-img " src="" alt="Project_Photo">
+                    {% endif %}
+                    {% if request.user == user %}
+                    <form method="POST" action="{% url 'projects_add_photo' p.id %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="file" name="photo-file">
+                        <br>
+                        <input type="submit" class="btn btn-outline-success mt-2" value="Upload Photo">
+                        <a class="btn btn-outline-danger mt-2" href="{% url 'projects_delete_photo' p.id %}">Delete Photo</a>
+                    </form>
+                    {% endif %}
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
-                </div>
-                <div class="card-footer d-flex justify-content-between">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                    <div>
-                        <a class="btn btn-outline-info" href="">Edit</a>
-                        <a class="btn btn-outline-danger" href="">Delete</a>
+                    <h5 class="card-title">{{p.project_name}}</h5>
+                    <p class="card-text">{{p.description}}</p>
+                    <p class="card-text">Technologies Used: {{p.technologies}}</p>
+                    <div class="d-flex justify-content-around">
+                        <a class="btn btn-outline-primary" href="{{p.project_link}}">Github</a>
+                        <a class="btn btn-outline-primary" href="{{p.deployed_link}}">View Project</a>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
-                </div>
                 <div class="card-footer d-flex justify-content-between">
-                    <small class="text-muted">Last updated 3 mins ago</small>
+                    <p class="text-muted">Date Created: {{p.date}}</p>
                     {% if request.user == user %}
                     <div>
                         <a href=""><button class="btn btn-outline-info">Edit</button></a>
@@ -66,6 +69,7 @@
                 </div>
             </div>
         </div>
+        {% endfor %}
 
     </div>
 </div>
