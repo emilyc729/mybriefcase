@@ -17,7 +17,7 @@
     {{portfolio.about_me}}
 </div>
 
-<form method="POST" action="{% url 'add_photo' portfolio.id %}" enctype="multipart/form-data">
+<form method="POST" action="{% url 'portfolio_add_photo' portfolio.id %}" enctype="multipart/form-data">
     {% csrf_token %}
     <input type="file" name="photo-file">
     <br>
