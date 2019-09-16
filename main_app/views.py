@@ -171,3 +171,11 @@ def projects_delete_photo(request, projects_id):
     projects.photo_url = ''
     projects.save()
     return redirect('user_profile', user)
+
+def search(request):
+    search_content = request.GET.get('content')
+    option = request.GET.get('option')
+    error_msg = ''
+    if not content:
+        error_msg = 'Please enter search term'
+        return render(request, 'main_app/user_profile')
