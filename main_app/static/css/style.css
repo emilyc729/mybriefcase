@@ -148,13 +148,17 @@ hr {
 
 
 /* Home page */
+
+#profile-cards::after {
+    content: '';
+    flex: auto;
+}
+
 .home-portfolio-links {
     padding: 20px;
     margin: 15px;
-    min-width: 200px;
-    max-width: 400px;
+    min-width: 350px;
 }
-
 
 .profile-img-home {
     width:140px;
