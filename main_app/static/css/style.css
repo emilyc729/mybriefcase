@@ -26,8 +26,10 @@ h3 {
     font-size: 20px;
 }
 
+
 main.container-fluid {
     padding: 0;
+    margin-top: 5%;
 }
 
 .title {
@@ -131,6 +133,7 @@ nav {
 
 .jumbotron {
     background-color: mintcream;
+    margin: 0;
 }
 
 
@@ -226,9 +229,17 @@ nav {
     background-color: var(--lighterblue);
 }
 
+/* Page Footer */
+#footer {
+    text-align: center;
+    background-color: var(--firstblue);
+    padding: 12px;
+}
 
-
-
+.fab {
+    font-size: 1.2em;
+    color: black;
+}
 
 
 
