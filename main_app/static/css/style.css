@@ -45,7 +45,7 @@ main.container-fluid {
     flex-direction: column;
     width: 450px;
     margin: 0 auto;
-    margin-bottom: 50px;
+    margin-bottom: 100px;
     padding: 30px 80px;
     background-color: var(--lighterblue);
     border-radius: 6px;
@@ -189,7 +189,7 @@ hr {
 
 .carousel-inner {
     background-color: white;
-    height: 450px;
+    height: 350px;
 }
 
 .carousel-item img {
@@ -247,6 +247,15 @@ hr {
     object-fit: cover;
     height: 290px;
     background: black;
+}
+
+
+.photo-form {
+    margin-top: 10px;
+}
+
+.edit-photo {
+    float: right;
 }
 
 #project-info {

@@ -10,7 +10,7 @@
             </h1>
             <h4>{{user.portfolio.profession}}</h4>
             <p>{{user.portfolio.about_me}}</p>
-            <p>Email: {{user.email}}</p>
+            <p>Email: <a href="mailto:{{user.email}}">{{user.email}}</a></p>
             <p>Profile Link: <a href="{{user.portfolio.profile_link}}">{{user.portfolio.profile_link}}</a></p>
             <p>Github Link: <a href="{{user.portfolio.github_link}}">{{user.portfolio.github_link}}</a></p>
         </div>
@@ -25,13 +25,14 @@
             {% endif %}
 
             {% if request.user == user %}
-                <form method="POST" action="{% url 'portfolio_add_photo' user.portfolio.id %}" enctype="multipart/form-data">
+                <a class="btn btn-outline-primary" data-toggle="collapse" data-target="#profile-img-upload">Edit Photo</a>
+                <form method="POST" action="{% url 'portfolio_add_photo' user.portfolio.id %}" id="profile-img-upload" class="collapse photo-form" enctype="multipart/form-data">
                     {% csrf_token %}
                     <input type="file" name="photo-file">
                     <br>
                     <input type="submit" class="btn btn-outline-success mt-2" value="Upload Photo">
+                    <a class="btn btn-outline-danger mt-2" href="{% url 'portfolio_delete_photo' user.portfolio.id %}">Delete Photo</a>
                 </form>
-                <a class="btn btn-outline-danger mt-2" href="{% url 'portfolio_delete_photo' user.portfolio.id %}">Delete Photo</a>
             {% endif %}
         </div>
     </div>
@@ -52,8 +53,8 @@
                     {% endif %}
                     <div id="project-info">
                         {% if request.user == user %}
-                            <a class="btn btn-outline-primary" data-toggle="collapse" data-target="#img-upload{{p.id}}">Edit Photo</a>
-                            <form method="POST" action="{% url 'projects_add_photo' p.id %}" enctype="multipart/form-data" id="img-upload{{p.id}}" class="collapse" >
+                            <a class="btn btn-outline-primary edit-photo" data-toggle="collapse" data-target="#img-upload{{p.id}}">Edit Photo</a>
+                            <form method="POST" action="{% url 'projects_add_photo' p.id %}" enctype="multipart/form-data" id="img-upload{{p.id}}" class="collapse photo-form" >
                                 {% csrf_token %}
                                 <input type="file" name="photo-file">
                                 <br>
