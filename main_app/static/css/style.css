@@ -128,3 +128,13 @@ h3 {
 #profile-img {
     width: 100%;
 }
+
+#project-img {
+    object-fit: cover;
+    height: 290px;
+    background: black;
+}
+
+#project-info {
+    padding: 10px;
+}
