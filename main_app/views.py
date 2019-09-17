@@ -6,12 +6,11 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-# photos
 import uuid
 import boto3
 
 S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
-BUCKET = 'dogcollector-ec'
+BUCKET = 'proj3mybriefcase'
 
 def home(request):
     users = User.objects.all()
@@ -47,11 +46,9 @@ def portfolio_add_photo(request, portfolio_id):
     photo_file = request.FILES.get('photo-file', None)
     portfolio = Portfolio.objects.get(id=portfolio_id)
     user = User.objects.get(id=request.user.id).id
-    # make sure a file is uploaded
     if photo_file:
         s3 = boto3.client('s3')
  
-        # random # + file extension(.jpg, .png)
         key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
         try:
             s3.upload_fileobj(photo_file, BUCKET, key)
@@ -71,7 +68,6 @@ def portfolio_delete_photo(request, portfolio_id):
     return redirect('user_profile', user)
 
 
-#sign up view
 def signup(request):
     error_message = ''
     if request.method == 'POST':
