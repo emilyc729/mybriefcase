@@ -23,7 +23,7 @@ def home(request):
 def user_profile(request, user_id):
     user = User.objects.get(id=user_id)
     portfolio_id = user.portfolio
-    projects = Project.objects.filter(portfolio=portfolio_id).order_by('-date')
+    projects = Project.objects.filter(portfolio=portfolio_id).order_by('date')
     return render(request, 'main_app/user_profile.html', {'user': user, 'projects':projects})
 
 class PortfolioCreate(LoginRequiredMixin, CreateView):
