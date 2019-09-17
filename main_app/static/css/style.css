@@ -39,7 +39,7 @@ input {
     border: 1px solid aquamarine;
 }
 
-
+/* Nav buttons */
 .btn-group {
     margin-left: 30px;
 }
@@ -72,7 +72,9 @@ h3 {
     flex-direction: row;
 }
 
-
+.form-group input{
+    width: 100%;
+}
 
 
 
@@ -91,33 +93,38 @@ h3 {
     background-color: white;
 }
 
-
-
-
 .carousel-item img {
     object-fit: scale-down;
-    max-height: 400px;
+    max-height: 380px;
+}
+
+#arrow-left,  #arrow-right{
+    color: grey;
+    font-size: 40px;
 }
 
 
-
-.form-group input{
-    width: 100%;
-}
-
-.carousel-control-prev-icon {
-    outline: grey;
-    padding: 3px;
-}
-
-/* .arrow-bg {
-    background-color: black;
-    padding: 3px 4px;
-    border-radius: 
-
-} */
 
 
 
 
 /* Sign Up Page */
+
+
+
+
+
+
+
+/* Profile / Portfolio Page */
+#profile {
+    display: flex;
+}
+
+#profile-img-box {
+    max-width: 400px;
+}
+
+#profile-img {
+    width: 100%;
+}

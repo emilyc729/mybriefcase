@@ -2,31 +2,40 @@
 {% block content %}
 
 {% if user.portfolio %}
-<div class="jumbotron">
-    <h1 class="display-4">{{user.first_name}} {{user.last_name}} <small class="text-muted">({{user.username}})</small>
-    </h1>
-    <h4>Profession: {{user.portfolio.profession}}</h4>
-    <h4>About Me: {{user.portfolio.about_me}}</h4>
-    <p>Email: {{user.email}}</p>
-    <p>Profile Link: <a href="{{user.portfolio.profile_link}}">{{user.portfolio.profile_link}}</a></p>
-    <p>Github Link: <a href="{{user.portfolio.github_link}}">{{user.portfolio.github_link}}</a></p>
-    
-    {% if user.portfolio.photo_url %}
-    <img class="responsive-img mb-4" src="{{user.portfolio.photo_url}}" alt="Avatar">
-    {% else %}
-    <img class="responsive-img mb-4" src="" alt="Avatar">
-    {% endif %}
+<div class="jumbotron" id="profile">
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <h1 class="display-4">{{user.first_name}} {{user.last_name}} <small class="text-muted">({{user.username}})</small>
+            </h1>
+            <h4>Profession: {{user.portfolio.profession}}</h4>
+            <h4>About Me: {{user.portfolio.about_me}}</h4>
+            <p>Email: {{user.email}}</p>
+            <p>Profile Link: <a href="{{user.portfolio.profile_link}}">{{user.portfolio.profile_link}}</a></p>
+            <p>Github Link: <a href="{{user.portfolio.github_link}}">{{user.portfolio.github_link}}</a></p>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-sm-12 col-md-5">
+            {% if user.portfolio.photo_url %}
+                <div id="profile-img-box">
+                    <img class="responsive-img mb-4" id="profile-img" src="{{user.portfolio.photo_url}}" alt="Avatar">
+                </div>
+            {% else %}
+                <img class="responsive-img mb-4" src="" alt="Avatar">
+            {% endif %}
 
-    {% if request.user == user %}
-    <form method="POST" action="{% url 'portfolio_add_photo' user.portfolio.id %}" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="file" name="photo-file">
-        <br>
-        <input type="submit" class="btn btn-outline-success mt-2" value="Upload Photo">
-    </form>
-    <a class="btn btn-outline-danger mt-2" href="{% url 'portfolio_delete_photo' user.portfolio.id %}">Delete Photo</a>
-    {% endif %}
+            {% if request.user == user %}
+                <form method="POST" action="{% url 'portfolio_add_photo' user.portfolio.id %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="file" name="photo-file">
+                    <br>
+                    <input type="submit" class="btn btn-outline-success mt-2" value="Upload Photo">
+                </form>
+                <a class="btn btn-outline-danger mt-2" href="{% url 'portfolio_delete_photo' user.portfolio.id %}">Delete Photo</a>
+            {% endif %}
+        </div>
+    </div>
 </div>
+
 <div class="container">
     
     <h1 class="title">Projects</h1>
