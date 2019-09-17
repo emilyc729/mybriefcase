@@ -148,6 +148,15 @@ hr {
 
 
 /* Home page */
+#welcome-box {
+    padding: 25px 0 15px 0;
+}
+
+.welcome {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
 
 #profile-cards::after {
     content: '';
@@ -156,8 +165,8 @@ hr {
 
 .home-portfolio-links {
     padding: 20px;
-    margin: 15px;
     min-width: 350px;
+    margin: 15px auto;
 }
 
 .profile-img-home {
@@ -177,6 +186,7 @@ hr {
 
 .carousel-inner {
     background-color: white;
+    height: 450px;
 }
 
 .carousel-item img {
@@ -189,7 +199,10 @@ hr {
     font-size: 40px;
 }
 
-
+.carousel-caption {
+    bottom: -95px;
+    color: black;
+}
 
 
 
