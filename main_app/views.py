@@ -181,7 +181,7 @@ def signup(request):
             user.email = request.POST.get('email')
             user.save()
             login(request, user)
-            return redirect('/')
+            return redirect('user_profile', user.id)
         else:
             error_message = 'Invalid sign up - try again'
     form = UserCreationForm()
