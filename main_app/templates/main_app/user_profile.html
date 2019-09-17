@@ -52,8 +52,8 @@
                     {% endif %}
                     <div id="project-info">
                         {% if request.user == user %}
-                            <a class="btn btn-outline-primary" data-toggle="collapse" data-target="#img-upload">Edit Photo</a>
-                            <form method="POST" action="{% url 'projects_add_photo' p.id %}" enctype="multipart/form-data" id="img-upload" class="collapse" >
+                            <a class="btn btn-outline-primary" data-toggle="collapse" data-target="#img-upload{{p.id}}">Edit Photo</a>
+                            <form method="POST" action="{% url 'projects_add_photo' p.id %}" enctype="multipart/form-data" id="img-upload{{p.id}}" class="collapse" >
                                 {% csrf_token %}
                                 <input type="file" name="photo-file">
                                 <br>

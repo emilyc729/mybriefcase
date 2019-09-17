@@ -130,6 +130,17 @@ nav {
 
 }
 
+#dropdown {
+    padding:.5rem 0 0 0;
+}
+
+
+
+
+
+hr {
+    margin: 0;
+}
 
 .jumbotron {
     background-color: mintcream;
@@ -140,13 +151,26 @@ nav {
 
 
 /* Home page */
-.home-portfolio-links {
-    padding: 20px;
-    margin: 15px;
-    min-width: 200px;
-    max-width: 400px;
+#welcome-box {
+    padding: 25px 0 15px 0;
 }
 
+.welcome {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+#profile-cards::after {
+    content: '';
+    flex: auto;
+}
+
+.home-portfolio-links {
+    padding: 20px;
+    min-width: 350px;
+    margin: 15px auto;
+}
 
 .profile-img-home {
     width:140px;
@@ -165,6 +189,7 @@ nav {
 
 .carousel-inner {
     background-color: white;
+    height: 450px;
 }
 
 .carousel-item img {
@@ -177,7 +202,10 @@ nav {
     font-size: 40px;
 }
 
-
+.carousel-caption {
+    bottom: -95px;
+    color: black;
+}
 
 
 
