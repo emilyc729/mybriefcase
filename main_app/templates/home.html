@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row" id="carousel-row">
         <div class="col-2"></div>
-        <div class="col-8" id="carousel">
+        <div class="col-8 mt-1" id="carousel">
             <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
@@ -55,10 +55,10 @@
 <div class=jumbotron>
     <h1>Portfolio Links</h1>
     
-    {% if user != "" %}
+    {% if user %}
     <div class="row">
         {% for user in users %}
-        {% if user.portfolio != "" %}
+        {% if user.portfolio %}
         <div class="col-md-4 mb-3 home-portfolio-links">
             <h3>{{user.first_name}} {{user.last_name}}</h3>
             <p>{{user.portfolio.profession}}</p>

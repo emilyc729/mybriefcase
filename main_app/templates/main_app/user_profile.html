@@ -36,7 +36,7 @@
         {% for p in projects %}
         <div class="col-md-6 mb-4">
             <div class="card">
-                    {% if user.portfolio.photo_url %}
+                    {% if p.photo_url %}
                     <img class="responsive-img card-img-top" src="{{p.photo_url}}" alt="Project Photo">
                     {% else %}
                     <img class="responsive-img " src="" alt="Project_Photo">
@@ -88,12 +88,6 @@
     <h1>You have not made a portfolio yet!</h1>
     <a class="btn btn-outline-success" href="{% url 'portfolio_create' %}">
         <i class="fas fa-plus"></i> Portfolio</a>
-</div>
-<div class="container">
-    <h1 class="title">Projects</h1>
-    <h2>No Projects Yet</h2>
-    <a class="btn btn-outline-success" href="">
-            <i class="fas fa-plus"></i> Project</a>
 </div>
 
 {% endif  %}
