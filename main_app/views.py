@@ -15,11 +15,9 @@ import boto3
 S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
 BUCKET = 'dogcollector-ec'
 
-
 def home(request):
     users = User.objects.all()
     return render(request, 'home.html', {'users': users})
-
 
 def user_profile(request, user_id):
     user = User.objects.get(id=user_id)
@@ -42,7 +40,6 @@ class PortfolioCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
-
 
 class PortfolioUpdate(LoginRequiredMixin, UpdateView):
     model = Portfolio
@@ -101,7 +98,6 @@ class ProjectCreate(LoginRequiredMixin, CreateView):
         form.instance.portfolio = self.request.user.portfolio
         return super().form_valid(form)
 
-
 class ProjectUpdate(LoginRequiredMixin, UpdateView):
     model = Project
     fields = [
@@ -116,7 +112,6 @@ class ProjectUpdate(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         user_id = self.request.user.id
         return reverse('user_profile', kwargs={'user_id': user_id})
-
 
 class ProjectDelete(LoginRequiredMixin, DeleteView):
     model = Project
@@ -146,7 +141,6 @@ def projects_add_photo(request, projects_id):
             print('An error occurred uploading file to s3')
     return redirect('user_profile', user)
 
-
 @login_required
 def projects_delete_photo(request, projects_id):
     user = User.objects.get(id=request.user.id).id
@@ -174,7 +168,6 @@ class MyLoginView(LoginView):
     def get_success_url(self):
         user_id = self.request.user.id
         return reverse('user_profile', kwargs={'user_id': user_id})
-
 
 # sign up view
 def signup(request):
