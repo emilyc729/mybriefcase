@@ -60,7 +60,7 @@
                     </div>
                 </div>
                 <div class="card-footer d-flex justify-content-between">
-                    <p class="text-muted">Date Created: {{p.date}}</p>
+                    <p class="text-muted">Project Completed: {{p.date}}</p>
                     {% if request.user == user %}
                     <div>
                         <a href="{% url 'projects_update' p.id %}"><button class="btn btn-outline-info">Edit</button></a>
