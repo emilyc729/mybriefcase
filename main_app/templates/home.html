@@ -54,18 +54,17 @@
 </div>
 
 <div class="jumbotron">
-    <h1>Portfolio Links</h1>
     {% if user %}
     <div class="row">
         {% for user in users %}
         {% if user.portfolio %}
         <div class="col-sm-6 col-md-6 col-lg-4">
-            <div class="card home-portfolio-links flex-row">
+            <div class="card home-portfolio-links flex-row d-flex align-items-center">
             {% if user.portfolio.photo_url %}
-                <img class="responsive-img mb-4 profile-img-home" src="{{user.portfolio.photo_url}}" alt="Avatar">
+                <img class="responsive-img profile-img-home" src="{{user.portfolio.photo_url}}" alt="Avatar">
             {% else %}
                     
-            <div class="responsive-img mb-4 profile-img-home profile-icon d-flex align-items-center justify-content-center">
+            <div class="responsive-img profile-img-home profile-icon d-flex align-items-center justify-content-center">
                 <i class="fas fa-user"></i>
             </div>
             {% endif %}
