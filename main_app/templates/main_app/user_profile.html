@@ -4,11 +4,12 @@
 {% if user.portfolio %}
 <div class="jumbotron" id="profile">
     <div class="row">
-        <div class="col-sm-12 col-md-6">
+        <div class="col-1"></div>
+        <div class="col-sm-12 col-md-5">
             <h1 class="display-4">{{user.first_name}} {{user.last_name}} <small class="text-muted">({{user.username}})</small>
             </h1>
-            <h4>Profession: {{user.portfolio.profession}}</h4>
-            <h4>About Me: {{user.portfolio.about_me}}</h4>
+            <h4>{{user.portfolio.profession}}</h4>
+            <p>{{user.portfolio.about_me}}</p>
             <p>Email: {{user.email}}</p>
             <p>Profile Link: <a href="{{user.portfolio.profile_link}}">{{user.portfolio.profile_link}}</a></p>
             <p>Github Link: <a href="{{user.portfolio.github_link}}">{{user.portfolio.github_link}}</a></p>
@@ -65,9 +66,9 @@
                         <h5 class="card-title">{{p.project_name}}</h5>
                         <p class="card-text">{{p.description}}</p>
                         <p class="card-text">Technologies Used: {{p.technologies}}</p>
-                        <div class="d-flex justify-content-around">
+                        <div>
                             <a class="btn btn-outline-primary" href="{{p.project_link}}">Github</a>
-                            <a class="btn btn-outline-primary" href="{{p.deployed_link}}">View Project</a>
+                            <a class="btn btn-outline-primary" href="{{p.deployed_link}}">Live Project</a>
                         </div>
                     </div>
                 </div>
