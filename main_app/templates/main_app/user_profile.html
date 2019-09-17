@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-1"></div>
         <div class="col-sm-12 col-md-5">
-            <h1 class="display-4">{{user.first_name}} {{user.last_name}} <small class="text-muted">({{user.username}})</small>
+            <h1 class="display-4" id="username">{{user.first_name}} {{user.last_name}} <small class="text-muted">({{user.username}})</small>
             </h1>
             <h4>{{user.portfolio.profession}}</h4>
             <p>{{user.portfolio.about_me}}</p>
@@ -21,7 +21,7 @@
                     <img class="responsive-img mb-4" id="profile-img" src="{{user.portfolio.photo_url}}" alt="Avatar">
                 </div>
             {% else %}
-                <img class="responsive-img mb-4" src="" alt="Avatar">
+                <div class="responsive-img mb-4 profile-icon d-flex align-items-center justify-content-center"><i class="fas fa-user"></i></div>
             {% endif %}
 
             {% if request.user == user %}
@@ -38,71 +38,68 @@
 </div>
 
 <div class="container">
-    
     <h1 class="title">Projects</h1>
-    
     <div class="row">
         
         {% if projects %}
-        {% for p in projects %}
-        <div class="col-md-6 mb-4">
-            <div class="card">
-                {% if user.portfolio.photo_url %}
-                    <img class="responsive-img card-img-top" id="project-img" src="{{p.photo_url}}" alt="Project Photo">
-                {% else %}
-                    <img class="responsive-img " src="" alt="Project_Photo">
-                {% endif %}
-                <div id="project-info">
-                    {% if request.user == user %}
-                        <a class="btn btn-outline-primary" data-toggle="collapse" data-target="#img-upload">Edit Photo</a>
-                        <form method="POST" action="{% url 'projects_add_photo' p.id %}" enctype="multipart/form-data" id="img-upload" class="collapse" >
-                            {% csrf_token %}
-                            <input type="file" name="photo-file">
-                            <br>
-                            <input type="submit" class="btn btn-outline-success mt-2" value="Upload Photo">
-                            <a class="btn btn-outline-danger mt-2" href="{% url 'projects_delete_photo' p.id %}">Delete Photo</a>
-                        </form>
+            {% for p in projects %}
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    {% if user.portfolio.photo_url %}
+                        <img class="responsive-img card-img-top" id="project-img" src="{{p.photo_url}}" alt="Project Photo">
+                    {% else %}
+                        <img class="responsive-img " src="" alt="Project_Photo">
                     {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{p.project_name}}</h5>
-                        <p class="card-text">{{p.description}}</p>
-                        <p class="card-text">Technologies Used: {{p.technologies}}</p>
-                        <div>
-                            <a class="btn btn-outline-primary" href="{{p.project_link}}">Github</a>
-                            <a class="btn btn-outline-primary" href="{{p.deployed_link}}">Live Project</a>
+                    <div id="project-info">
+                        {% if request.user == user %}
+                            <a class="btn btn-outline-primary" data-toggle="collapse" data-target="#img-upload">Edit Photo</a>
+                            <form method="POST" action="{% url 'projects_add_photo' p.id %}" enctype="multipart/form-data" id="img-upload" class="collapse" >
+                                {% csrf_token %}
+                                <input type="file" name="photo-file">
+                                <br>
+                                <input type="submit" class="btn btn-outline-success mt-2" value="Upload Photo">
+                                <a class="btn btn-outline-danger mt-2" href="{% url 'projects_delete_photo' p.id %}">Delete Photo</a>
+                            </form>
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{p.project_name}}</h5>
+                            <p class="card-text">{{p.description}}</p>
+                            <p class="card-text">Technologies Used: {{p.technologies}}</p>
+                            <div>
+                                <a class="btn btn-outline-primary" href="{{p.project_link}}">Github</a>
+                                <a class="btn btn-outline-primary" href="{{p.deployed_link}}">Live Project</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-footer d-flex justify-content-between">
-                    <p class="text-muted">Project Completed: {{p.date}}</p>
-                    {% if request.user == user %}
-                    <div>
-                        <a href="{% url 'projects_update' p.id %}"><button class="btn btn-outline-info">Edit</button></a>
-                        <a href="{% url 'projects_delete' p.id %}"><button class="btn btn-outline-danger">Delete</button></a>
+                    <div class="card-footer d-flex justify-content-between">
+                        <p class="text-muted">Project Completed: {{p.date}}</p>
+                        {% if request.user == user %}
+                        <div>
+                            <a href="{% url 'projects_update' p.id %}"><button class="btn btn-outline-info">Edit</button></a>
+                            <a href="{% url 'projects_delete' p.id %}"><button class="btn btn-outline-danger">Delete</button></a>
+                        </div>
+                        {% endif %}
                     </div>
-                    {% endif %}
                 </div>
             </div>
-        </div>
-        {% endfor %}
+            {% endfor %}
         {% else %}
-            <h2>'{{user}}' has no projects yet. 😢 </h2>
-            {% if request.user == user %}
-            <div class="project-create">
-            <a class="btn btn-outline-primary" href="{% url 'projects_create' %}">
-                    <i class="fas fa-plus"></i> Project</a>
-            </div>
-            {% endif %}
-        {% endif %}
-
     </div>
 </div>
+<div class="jumbotron d-flex flex-column align-items-center">
+    <p class="text-center">{{user}} has no projects yet. </p>
+    {% if request.user == user %}
+        <div class="project-create">
+            <a class="btn btn-outline-primary mx-auto" href="{% url 'projects_create' %}"><i class="fas fa-plus"></i> Project</a>
+        </div>
+    {% endif %}
+</div>
+    {% endif %}
 {% else %}
-<div class="jumbotron">
+<div class="jumbotron" >
     <h1>You have not made a portfolio yet!</h1>
     <a class="btn btn-outline-success" href="{% url 'portfolio_create' %}">
         <i class="fas fa-plus"></i> Portfolio</a>
 </div>
-
 {% endif  %}
 {% endblock %}
