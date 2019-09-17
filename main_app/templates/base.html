@@ -50,7 +50,7 @@
                         aria-expanded="false">
                         <i class="fas fa-bars"></i>
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right">
+                    <div class="dropdown-menu dropdown-menu-right" id="dropdown">
                         <a class="dropdown-item" href="{% url 'home' %}">Home</a>
                         <a class="dropdown-item" href="{% url 'user_profile' request.user.id %}">My Portfolio</a>
                         {% if request.user.portfolio == '' %}
