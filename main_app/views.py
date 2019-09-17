@@ -22,9 +22,8 @@ def home(request):
 
 def user_profile(request, user_id):
     user = User.objects.get(id=user_id)
-    portfolio_id = user.id
-    projects = Project.objects.filter(portfolio_id=portfolio_id)
-    print(projects)
+    portfolio_id = user.portfolio
+    projects = Project.objects.filter(portfolio=portfolio_id).order_by('date')
     return render(request, 'main_app/user_profile.html', {'user': user, 'projects':projects})
 
 class PortfolioCreate(LoginRequiredMixin, CreateView):
@@ -77,27 +76,6 @@ def portfolio_delete_photo(request, portfolio_id):
     portfolio.photo_url = ''
     portfolio.save()
     return redirect('user_profile', user)
-
-
-# sign up view
-def signup(request):
-    error_message = ''
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.first_name = request.POST.get('first_name')
-            user.last_name = request.POST.get('last_name')
-            user.email = request.POST.get('email')
-            user.save()
-            login(request, user)
-            return redirect('/')
-        else:
-            error_message = 'Invalid sign up - try again'
-    form = UserCreationForm()
-    context = {'form': form, 'error_message': error_message}
-    return render(request, 'registration/signup.html', context)
-
 
 class ProjectCreate(LoginRequiredMixin, CreateView):
     model = Project
@@ -186,3 +164,22 @@ def search(request):
     # then get profolio objects
     # projects = Project.objects.filter(contain: technologies)
     # for project in projects
+
+# sign up view
+def signup(request):
+    error_message = ''
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.first_name = request.POST.get('first_name')
+            user.last_name = request.POST.get('last_name')
+            user.email = request.POST.get('email')
+            user.save()
+            login(request, user)
+            return redirect('/')
+        else:
+            error_message = 'Invalid sign up - try again'
+    form = UserCreationForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'registration/signup.html', context)

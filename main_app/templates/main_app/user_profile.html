@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 <div class="card-footer d-flex justify-content-between">
-                    <p class="text-muted">Date Created: {{p.date}}</p>
+                    <p class="text-muted">Project Completed: {{p.date}}</p>
                     {% if request.user == user %}
                     <div>
                         <a href="{% url 'projects_update' p.id %}"><button class="btn btn-outline-info">Edit</button></a>
@@ -84,7 +84,7 @@
             </div>
         </div>
         {% endfor %}
-            {% else %}
+        {% else %}
             <h2>'{{user}}' has no projects yet. 😢 </h2>
             {% if request.user == user %}
             <div class="project-create">
@@ -101,12 +101,6 @@
     <h1>You have not made a portfolio yet!</h1>
     <a class="btn btn-outline-success" href="{% url 'portfolio_create' %}">
         <i class="fas fa-plus"></i> Portfolio</a>
-</div>
-<div class="container">
-    <h1 class="title">Projects</h1>
-    <h2>No Projects Yet</h2>
-    <a class="btn btn-outline-success" href="">
-            <i class="fas fa-plus"></i> Project</a>
 </div>
 
 {% endif  %}
