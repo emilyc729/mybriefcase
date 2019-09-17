@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
+from django.contrib.auth.views import LoginView
 # photos
 import uuid
 import boto3
@@ -22,9 +23,13 @@ def home(request):
 
 def user_profile(request, user_id):
     user = User.objects.get(id=user_id)
-    portfolio_id = user.portfolio
-    projects = Project.objects.filter(portfolio=portfolio_id).order_by('date')
-    return render(request, 'main_app/user_profile.html', {'user': user, 'projects':projects})
+    if Portfolio.objects.filter(user_id=user.id).exists():
+        portfolio_id = user.portfolio
+        projects = Project.objects.filter(portfolio=portfolio_id).order_by('date')
+        print(projects)
+        return render(request, 'main_app/user_profile.html', {'user': user, 'projects':projects})
+    else:
+        return render(request, 'main_app/user_profile.html', {'user': user})
 
 class PortfolioCreate(LoginRequiredMixin, CreateView):
     model = Portfolio
@@ -165,6 +170,12 @@ def search(request):
     # projects = Project.objects.filter(contain: technologies)
     # for project in projects
 
+class MyLoginView(LoginView):
+    def get_success_url(self):
+        user_id = self.request.user.id
+        return reverse('user_profile', kwargs={'user_id': user_id})
+
+
 # sign up view
 def signup(request):
     error_message = ''
@@ -177,9 +188,11 @@ def signup(request):
             user.email = request.POST.get('email')
             user.save()
             login(request, user)
-            return redirect('/')
+            return redirect('user_profile', user.id)
         else:
             error_message = 'Invalid sign up - try again'
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+
+
