@@ -97,8 +97,8 @@
 </div>
     {% endif %}
 {% else %}
-<div class="jumbotron" >
-    <h1>You have not made a portfolio yet!</h1>
+<div class="jumbotron d-flex align-items-center flex-column" >
+    <h1 class="text-center">Click to create a portfolio :)</h1>
     <a class="btn btn-outline-success" href="{% url 'portfolio_create' %}">
         <i class="fas fa-plus"></i> Portfolio</a>
 </div>
