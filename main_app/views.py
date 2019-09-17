@@ -93,7 +93,7 @@ class ProjectCreate(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         user_id = self.request.user.id
         return reverse('user_profile', kwargs={'user_id': user_id})
-
+ 
     def form_valid(self, form):
         form.instance.portfolio = self.request.user.portfolio
         return super().form_valid(form)

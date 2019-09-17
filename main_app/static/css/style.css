@@ -234,12 +234,14 @@ nav {
     text-align: center;
     background-color: var(--firstblue);
     padding: 12px;
+    margin-top: 10px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }
 
 .fab {
     font-size: 1.2em;
     color: black;
 }
-
-
-
