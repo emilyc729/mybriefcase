@@ -171,6 +171,10 @@ nav {
     display: flex;
 }
 
+#username {
+    padding: 0px;
+}
+
 #profile-img-box {
     max-width: 400px;
 }
