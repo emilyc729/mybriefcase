@@ -52,13 +52,14 @@
     </div>
 </div>
 
-<div class=jumbotron>
+<div class="jumbotron">
     <h1>Portfolio Links</h1>
     {% if user %}
-    <div class="row d-flex justify-content-around">
+    <div class="row">
         {% for user in users %}
         {% if user.portfolio %}
-        <div class="col-sm-6 col-md-6 col-lg-4 card home-portfolio-links d-flex flex-row">
+        <div class="col-sm-6 col-md-6 col-lg-4">
+            <div class="card home-portfolio-links flex-row">
             {% if user.portfolio.photo_url %}
                 <img class="responsive-img mb-4 profile-img-home" src="{{user.portfolio.photo_url}}" alt="Avatar">
             {% else %}
@@ -72,6 +73,7 @@
                 <p>{{user.portfolio.profession}}</p>
                 <a href="{% url 'user_profile' user.id %}"><button type="button" class="btn btn-outline-primary">View Portfolio</button></a>
             </div>
+        </div>
         </div>
         {% endif %}
         {% endfor %}
