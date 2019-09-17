@@ -30,7 +30,7 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="{% url 'home' %}"><i class="fas fa-briefcase"></i> Briefcase</a>
             <ul class="navbar-nav ml-auto" id="nav-components">
                 <li class="nav-item">
@@ -46,7 +46,7 @@
                 </li>
                 {% if request.user.is_authenticated %}
                 <div class="btn-group">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
                         <i class="fas fa-bars"></i>
                     </button>
@@ -57,11 +57,13 @@
                         <a class="dropdown-item" href="{% url 'portfolio_create' %}">
                             <i class="fas fa-plus"></i> Profile</a>
                         {% else %}
+                        <hr>
                         <a class="dropdown-item" href="{% url 'portfolio_update' request.user.portfolio.id %}">
                             <i class="fas fa-edit"></i> Portfolio</a>
                         {% endif %}
                         <a class="dropdown-item" href="{% url 'projects_create' %}" >
                             <i class="fas fa-plus"></i> Project</a>
+                        <hr>
                         <a class="dropdown-item" href="{% url 'logout' %}">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i
                                     class="fas fa-sign-out-alt"></i> Logout</button>
