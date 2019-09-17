@@ -22,9 +22,13 @@ def home(request):
 
 def user_profile(request, user_id):
     user = User.objects.get(id=user_id)
-    portfolio_id = user.portfolio
-    projects = Project.objects.filter(portfolio=portfolio_id).order_by('date')
-    return render(request, 'main_app/user_profile.html', {'user': user, 'projects':projects})
+    if Portfolio.objects.filter(user_id=user.id).exists():
+        portfolio_id = user.portfolio
+        projects = Project.objects.filter(portfolio=portfolio_id).order_by('date')
+        print(projects)
+        return render(request, 'main_app/user_profile.html', {'user': user, 'projects':projects})
+    else:
+        return render(request, 'main_app/user_profile.html', {'user': user})
 
 class PortfolioCreate(LoginRequiredMixin, CreateView):
     model = Portfolio
@@ -177,7 +181,7 @@ def signup(request):
             user.email = request.POST.get('email')
             user.save()
             login(request, user)
-            return redirect('/')
+            return redirect('user_profile', user.id)
         else:
             error_message = 'Invalid sign up - try again'
     form = UserCreationForm()
