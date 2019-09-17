@@ -48,14 +48,18 @@ main.container-fluid {
     border-radius: 6px;
 }
 
-input {
-    border: 1px solid aquamarine;
-    border-radius: 2px;
-}
-
 label {
     font-weight: 200;
+    float: left;
+    margin-right: 15px;
 }
+
+input {
+    border: 1px solid var(--darkerblue);
+    border-radius: 3px;
+}
+
+
 
 
 
@@ -67,12 +71,18 @@ label {
     background-color: white;
 }
 
-.btn-outline-primary {
+.btn-outline-primary, .btn-primary {
     border: 1px solid var(--darkerblue);
-    color: var(--darkerblue)
+    color: var(--darkerblue);
 }
 
 .btn-outline-primary:hover {
+    background-color: var(--firstblue);
+    border: 1px solid aquamarine;
+    color: black;
+}
+
+.btn-primary:hover {
     background-color: var(--firstblue);
     border: 1px solid aquamarine;
     color: black;
