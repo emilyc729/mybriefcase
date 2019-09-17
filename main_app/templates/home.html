@@ -63,7 +63,10 @@
             {% if user.portfolio.photo_url %}
                 <img class="responsive-img mb-4 profile-img-home" src="{{user.portfolio.photo_url}}" alt="Avatar">
             {% else %}
-                <div class="responsive-img mb-4 profile-img-home profile-icon text-center"><i class="fas fa-user"></i></div>
+                    
+            <div class="responsive-img mb-4 profile-img-home profile-icon d-flex align-items-center justify-content-center">
+                <i class="fas fa-user"></i>
+            </div>
             {% endif %}
             <div class="profile-info">
                 <h3>{{user.first_name}} {{user.last_name}}</h3>

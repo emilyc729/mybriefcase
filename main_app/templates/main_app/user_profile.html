@@ -21,7 +21,7 @@
                     <img class="responsive-img mb-4" id="profile-img" src="{{user.portfolio.photo_url}}" alt="Avatar">
                 </div>
             {% else %}
-                <img class="responsive-img mb-4" src="" alt="Avatar">
+                <div class="responsive-img mb-4 profile-icon d-flex align-items-center justify-content-center"><i class="fas fa-user"></i></div>
             {% endif %}
 
             {% if request.user == user %}
