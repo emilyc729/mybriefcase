@@ -1,5 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
+
+<h1>Welcome to Briefcase: a place to view and share eachother's portfolios</h1>
+
+
+
+<div class=jumbotron>
+    <h1>Portfolio Links</h1>
+    
+    {% if user != "" %}
+    <div class="row">
+        {% for user in users %}
+        {% if user.portfolio != "" %}
+        <div class="col-md-4 mb-3 home-portfolio-links">
+            <h3>{{user.first_name}} {{user.last_name}}</h3>
+            <p>{{user.portfolio.profession}}</p>
+            <a href="{% url 'user_profile' user.id %}"><button type="button" class="btn btn-outline-primary">View Portfolio</button></a>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% else %}
+        <h2>There are no users with portfolios</h2>
+    {% endif %}
+
+</div>
+
 <div class="container">
     <div class="row" id="carousel-row">
         <div class="col-2"></div>
@@ -35,15 +61,13 @@
             </div>
             
                 <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-                    <div class="arrow-bg">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </div>
+                    <span class="fas fa-angle-left" id="arrow-left" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
                 </a>
             
             <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
                 
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="fas fa-angle-right" id="arrow-right" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
             </div>
@@ -72,8 +96,5 @@
     {% endif %}
 
 </div>
-
-    
-
 
 {% endblock %}

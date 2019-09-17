@@ -5,9 +5,8 @@
 {% if error_message %}<p class="red-text">{{ error_message }}</p>{% endif %}
 
 
-<form method="post" action="{% url 'signup' %}">
+<form method="post" action="{% url 'signup' %}" class="form-style">
     {% csrf_token %}
-    <div class="form-row">
         <div class="col-md-2 mb-3">
             <label for="first_name">First Name:</label>
             <input type="text" name="first_name" required>
@@ -20,10 +19,9 @@
             <label for="email">Email:</label>
             <input type="email" name="email" required>
         </div>
-    </div>
 
 
-    <div class="form-row">
+
         <div class="col-md-8 mb-3">
             {% for field in form %} 
                 {{field.label_tag}}    {{field}}
@@ -31,7 +29,6 @@
                 {{ field.errors }}
             {% endfor %}
         </div>
-    </div>
     <input type="submit" class="btn btn-outline-primary" value="Sign Up">
 </form>
 

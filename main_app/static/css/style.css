@@ -1,59 +1,21 @@
+/* Colors */
 :root {
-	--primary: #7f170e;
-	--secondary: hsla(31, 64%, 90%, 1);
-	--pink: hsla(0, 64%, 82%, 0.21);
-	--green: #8da54a;
-	--orange: #e1772e;
-	--offwhite:
+    --secondary: hsla(31, 64%, 90%, 1);
+    --beige: #ECE9E1;
+    --tan: #D3C8B3;
+    --darkBrown: #493C2C;
+    --blue: rgb(193, 219, 217);
+    --darkerblue: rgb(36, 107, 101);
+    --firstblue: rgb(193, 240, 236);
+    --lighterblue: rgb(219, 243, 241);
+    --lightblue: hsl(200, 50%, 90%);
 }
-
-main.container-fluid {
-    padding: 0;
-}
-
-
-.title {
-    text-align: center;
-}
-
-
-
-
-/* Element styles (inputs, buttons, jumbotron*/
-input {
-    border: 1px solid aquamarine;
-    border-radius: 2px;
-}
-
-.btn {
-    padding: 5px 20px;
-}
-
-.btn-primary {
-    background-color: olivedrab;
-    border: 1px solid aquamarine;
-}
-
-.btn-primary:hover {
-    background-color: mediumaquamarine;
-    border: 1px solid aquamarine;
-}
-
-
-.btn-group {
-    margin-left: 30px;
-}
-
-.jumbotron {
-    background-color: mintcream;
-}
-
 
 
 /* Font Styles */
 
 h1 {
-    padding-bottom: 20px;
+    padding: 20px 30px;
     font-family: 'Manjari', serif;
     font-weight: bold;
 }
@@ -64,6 +26,75 @@ h3 {
     font-size: 20px;
 }
 
+main.container-fluid {
+    padding: 0;
+}
+
+.title {
+    text-align: center;
+}
+
+
+/* form styles */
+
+.form-style {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 700px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: var(--lighterblue);
+    border-radius: 6px;
+}
+
+label {
+    font-weight: 200;
+    float: left;
+    margin-right: 15px;
+}
+
+input {
+    border: 1px solid var(--darkerblue);
+    border-radius: 3px;
+}
+
+
+
+
+
+/* Buttons styling */
+
+
+.btn {
+    padding: 5px 20px;
+    background-color: white;
+}
+
+.btn-outline-primary, .btn-primary {
+    border: 1px solid var(--darkerblue);
+    color: var(--darkerblue);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--firstblue);
+    border: 1px solid aquamarine;
+    color: black;
+}
+
+.btn-primary:hover {
+    background-color: var(--firstblue);
+    border: 1px solid aquamarine;
+    color: black;
+}
+
+/* Nav buttons */
+.btn-group {
+    margin-left: 30px;
+}
+
+
+
 
 
 
@@ -72,12 +103,27 @@ h3 {
     flex-direction: row;
 }
 
+.form-group input{
+    width: 100%;
+}
+
+nav {
+    background-color: var(--firstblue);
+}
+
+
+
+
 .navbar {
     box-shadow: 0 2px 4px -1px rgba(0,0,0,0.25);
     border-radius: 10px;
 
 }
 
+
+.jumbotron {
+    background-color: mintcream;
+}
 
 
 
@@ -97,33 +143,59 @@ h3 {
     background-color: white;
 }
 
-
-
-
 .carousel-item img {
     object-fit: scale-down;
-    max-height: 400px;
+    max-height: 380px;
+}
+
+#arrow-left,  #arrow-right{
+    color: grey;
+    font-size: 40px;
 }
 
 
-
-.form-group input{
-    width: 100%;
-}
-
-.carousel-control-prev-icon {
-    outline: grey;
-    padding: 3px;
-}
-
-/* .arrow-bg {
-    background-color: black;
-    padding: 3px 4px;
-    border-radius: 
-
-} */
 
 
 
 
 /* Sign Up Page */
+
+
+
+
+
+
+
+/* Profile / Portfolio Page */
+#profile {
+    display: flex;
+}
+
+#profile-img-box {
+    max-width: 400px;
+}
+
+#profile-img {
+    width: 100%;
+}
+
+#project-img {
+    object-fit: cover;
+    height: 290px;
+    background: black;
+}
+
+#project-info {
+    padding: 10px;
+}
+
+.card-footer {
+    background-color: var(--lighterblue);
+}
+
+
+
+
+
+
+
