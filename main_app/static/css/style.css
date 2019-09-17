@@ -26,8 +26,10 @@ h3 {
     font-size: 20px;
 }
 
+
 main.container-fluid {
     padding: 0;
+    margin-top: 5%;
 }
 
 .title {
@@ -142,6 +144,7 @@ hr {
 
 .jumbotron {
     background-color: mintcream;
+    margin: 0;
 }
 
 
@@ -254,9 +257,20 @@ hr {
     background-color: var(--lighterblue);
 }
 
+/* Page Footer */
+#footer {
+    text-align: center;
+    background-color: var(--firstblue);
+    padding: 12px;
+    margin-top: 10px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
 
-
-
-
-
+.fab {
+    font-size: 1.2em;
+    color: black;
+}
 
