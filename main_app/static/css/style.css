@@ -144,10 +144,9 @@ hr {
 
 .jumbotron {
     background-color: mintcream;
-    margin: 0;
+    margin: 0 auto;
+    padding-top: 15px;
 }
-
-
 
 
 /* Home page */
@@ -189,12 +188,12 @@ hr {
 
 .carousel-inner {
     background-color: white;
-    height: 450px;
+    height: 560px;
 }
 
 .carousel-item img {
     object-fit: scale-down;
-    max-height: 380px;
+    max-height: 490px;
 }
 
 #arrow-left,  #arrow-right{

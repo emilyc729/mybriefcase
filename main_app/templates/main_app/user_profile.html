@@ -45,7 +45,7 @@
             {% for p in projects %}
             <div class="col-md-6 mb-4">
                 <div class="card">
-                    {% if user.portfolio.photo_url %}
+                    {% if p.photo_url %}
                         <img class="responsive-img card-img-top" id="project-img" src="{{p.photo_url}}" alt="Project Photo">
                     {% else %}
                         <img class="responsive-img " src="" alt="Project_Photo">
