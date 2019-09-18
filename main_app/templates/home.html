@@ -37,17 +37,18 @@
                     </div>
                     {% for user in users %}
                     {% if user.portfolio %}
-
                     {% for p in projects %}
-
-                    <div class="carousel-item">
-                        <img src="{{p.photo_url}}" class="d-block w-100" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>{{p.project_name}}</h5>
-                            <p>By {{p.portfolio.user}}</p>
+                    
+                        <div class="carousel-item">
+                            <a href="{% url 'user_profile' p.portfolio.user.id %}">
+                                <img src="{{p.photo_url}}" class="d-block w-100" alt="...">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>{{p.project_name}}</h5>
+                                    <p>By {{p.portfolio.user}}</p>
+                                </div>
+                            </a>
                         </div>
-                    </div>
-
+                    
                     {% endfor %}
                     {% endif %}
                     {% endfor %}
@@ -74,12 +75,12 @@
     {% if user %}
     <div class="row">
             
-        {% for user in users %}
-        {% if user.portfolio %}
+        {% for portfolio in portfolios %}
+        {% if portfolio %}
         <div class="col-sm-6 col-md-6 col-lg-4">
             <div class="card home-portfolio-links flex-row d-flex align-items-center">
-                {% if user.portfolio.photo_url %}
-                <img class="responsive-img profile-img-home" src="{{user.portfolio.photo_url}}" alt="Avatar">
+                {% if portfolio.photo_url %}
+                <img class="responsive-img profile-img-home" src="{{portfolio.photo_url}}" alt="Avatar">
                 {% else %}
 
                 <div
@@ -88,16 +89,16 @@
                 </div>
                 {% endif %}
                 <div class="profile-info">
-                    <h3>{{user.first_name}} {{user.last_name}}</h3>
-                    <p>{{user.portfolio.profession}}</p>
-                    <a href="{% url 'user_profile' user.id %}"><button type="button"
+                    <h3>{{portfolio.user.first_name}} {{portfolio.user.last_name}}</h3>
+                    <p>{{portfolio.profession}}</p>
+                    <a href="{% url 'user_profile' portfolio.user.id %}"><button type="button"
                             class="btn btn-outline-primary">View Portfolio</button></a>
                 </div>
             </div>
         </div>
-
         {% endif %}
         {% endfor %}
+        
     </div>
     {% else %}
     <h2>There are no users with portfolios</h2>

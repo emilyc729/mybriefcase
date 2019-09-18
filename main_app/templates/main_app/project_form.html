@@ -7,21 +7,64 @@
     {% else %}
         <h1>Add Project</h1>
     {% endif %}
+    <div class="bootstrap-iso">
+        <div id="project-form-box">
+            <form action="" method="post" class="form-style">
+                {% csrf_token %}
+                
+                {% for field in form %}
+                <div class="form-group">
+                    {{ field.label_tag }} {{ field }}
+                    <br>
+                    {{ field.help_text }}
+                    {{ field.errors }}
+                </div>
+                 {% endfor %}
 
-    <div id="project-form-box">
-        <form action="" method="post" class="form-style">
-            {% csrf_token %}
-            {% for field in form %}
-            <div class="form-group">
-            {{ field.label_tag }} {{ field }}
-            <br>
-            {{ field.help_text }}
-            {{ field.errors }}
+                <!-- <div class = "form-group">
+                    <label class="control-label" for="portfolio_name">Project name:</label>
+                    <input class="form-control" id="portfolio_name" name="portfolio_name" type="text">
+                </div>
+                <div class = "form-group">
+                    <label class="control-label" for="technologies">Technologies</label>
+                    <textarea class="form-control" id="technologies" name="technologies" type="text"></textarea>
+                </div>
+                <div class = "form-group">
+                    <label class="control-label" for="deployed_link">Deployed link:</label>
+                    <input class="form-control" id="deployed_link" name="deployed_link" type="text">
+                </div>
+                <div class = "form-group">
+                    <label class="control-label" for="project_link">Project link</label>
+                    <input class="form-control" id="project_link" name="project_link" type="text">
+                </div>
+                <div class = "form-group">
+                    <label class="control-label" for="description">Description</label>
+                    <textarea class="form-control" id="description" name="description" type="text"></textarea>
+                </div>
+                 -->
+                <div class="form-group">
+                    <label class="control-label" for="date">Date</label>
+                    <input class="form-control" id="datepicker" name="date" placeholder="YYYY-MM-DD" type="text"/>
+                </div>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
     </div>
-    {% endfor %}
-            <input type="submit" value="Submit">
-        </form>
-    </div>
-
-
+<script>
+    var field = document.getElementById('datepicker');
+    var picker = new Pikaday({
+        field: document.getElementById('datepicker'),
+        format: 'D/M/YYYY',
+        toString(date, format) {
+            const day = date.getDate();
+            const month = date.getMonth() + 1;
+            const year = date.getFullYear();
+            return `${year}-${month}-${day}`;
+        },
+        onSelect: function(date) {
+            var date = field.value = picker.toString();
+        }
+    });
+    field.parentNode.insertBefore(picker.el, field.nextSibling);
+</script>
 {% endblock %}

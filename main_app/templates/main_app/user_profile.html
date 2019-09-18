@@ -10,7 +10,7 @@
             </h1>
             <h4>{{user.portfolio.profession}}</h4>
             <p>{{user.portfolio.about_me}}</p>
-            <p>Email: {{user.email}}</p>
+            <p>Email: <a href="mailto:{{user.email}}">{{user.email}}</a></p>
             <p>Profile Link: <a href="{{user.portfolio.profile_link}}">{{user.portfolio.profile_link}}</a></p>
             <p>Github Link: <a href="{{user.portfolio.github_link}}">{{user.portfolio.github_link}}</a></p>
         </div>
@@ -25,20 +25,30 @@
             {% endif %}
 
             {% if request.user == user %}
-                <form method="POST" action="{% url 'portfolio_add_photo' user.portfolio.id %}" enctype="multipart/form-data">
+                <a class="btn btn-outline-primary" data-toggle="collapse" data-target="#profile-img-upload">Edit Photo</a>
+                <form method="POST" action="{% url 'portfolio_add_photo' user.portfolio.id %}" id="profile-img-upload" class="collapse photo-form" enctype="multipart/form-data">
                     {% csrf_token %}
                     <input type="file" name="photo-file">
                     <br>
                     <input type="submit" class="btn btn-outline-success mt-2" value="Upload Photo">
+                    <a class="btn btn-outline-danger mt-2" href="{% url 'portfolio_delete_photo' user.portfolio.id %}">Delete Photo</a>
                 </form>
-                <a class="btn btn-outline-danger mt-2" href="{% url 'portfolio_delete_photo' user.portfolio.id %}">Delete Photo</a>
             {% endif %}
         </div>
     </div>
 </div>
 
 <div class="container mb-5">
-    <h1 class="title">Projects</h1>
+    <div class="d-flex justify-content-between">
+        <h1 class="title">Projects</h1>
+        {% if 'profile' in request.path or user.id|stringformat:"i" in request.path %}
+        <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'search_projects' user.id %}">
+            {% csrf_token %}
+            <input class="form-control mr-1" name="search_content" type="search" placeholder="Search by techs" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        {% endif %}
+    </div>
     <div class="row">
         
         {% if projects %}
@@ -52,8 +62,8 @@
                     {% endif %}
                     <div id="project-info">
                         {% if request.user == user %}
-                            <a class="btn btn-outline-primary" data-toggle="collapse" data-target="#img-upload{{p.id}}">Edit Photo</a>
-                            <form method="POST" action="{% url 'projects_add_photo' p.id %}" enctype="multipart/form-data" id="img-upload{{p.id}}" class="collapse" >
+                            <a class="btn btn-outline-primary edit-photo" data-toggle="collapse" data-target="#img-upload{{p.id}}">Edit Photo</a>
+                            <form method="POST" action="{% url 'projects_add_photo' p.id %}" enctype="multipart/form-data" id="img-upload{{p.id}}" class="collapse photo-form" >
                                 {% csrf_token %}
                                 <input type="file" name="photo-file">
                                 <br>
@@ -87,7 +97,11 @@
     </div>
 </div>
 <div class="jumbotron d-flex flex-column align-items-center">
+    {% if 'search' in request.path %}
+        <p class="text-center">No projects found. </p>
+    {% else %}
     <p class="text-center">{{user}} has no projects yet. </p>
+    {% endif %}
     {% if request.user == user %}
         <div class="project-create">
             <a class="btn btn-outline-primary mx-auto" href="{% url 'projects_create' %}"><i class="fas fa-plus"></i> Project</a>
@@ -96,8 +110,8 @@
 </div>
     {% endif %}
 {% else %}
-<div class="jumbotron" >
-    <h1>You have not made a portfolio yet!</h1>
+<div class="jumbotron d-flex align-items-center flex-column" >
+    <h1 class="text-center">Click to create a portfolio :)</h1>
     <a class="btn btn-outline-success" href="{% url 'portfolio_create' %}">
         <i class="fas fa-plus"></i> Portfolio</a>
 </div>

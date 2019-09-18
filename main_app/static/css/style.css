@@ -1,3 +1,5 @@
+
+
 /* Colors */
 :root {
     --secondary: hsla(31, 64%, 90%, 1);
@@ -29,7 +31,7 @@ h3 {
 
 main.container-fluid {
     padding: 0;
-    margin-top: 5%;
+    margin-top: 75px;
 }
 
 .title {
@@ -43,9 +45,9 @@ main.container-fluid {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    width: 450px;
+    width: 550px;
     margin: 0 auto;
-    margin-bottom: 50px;
+    margin-bottom: 100px;
     padding: 30px 80px;
     background-color: var(--lighterblue);
     border-radius: 6px;
@@ -133,7 +135,6 @@ nav {
 #dropdown {
     padding:.5rem 0 0 0;
 }
-
 
 
 
@@ -246,6 +247,15 @@ hr {
     object-fit: cover;
     height: 290px;
     background: black;
+}
+
+
+.photo-form {
+    margin-top: 10px;
+}
+
+.edit-photo {
+    float: right;
 }
 
 #project-info {
