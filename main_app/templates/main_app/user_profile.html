@@ -87,7 +87,11 @@
     </div>
 </div>
 <div class="jumbotron d-flex flex-column align-items-center">
+    {% if 'search' in request.path %}
+        <p class="text-center">No projects found. </p>
+    {% else %}
     <p class="text-center">{{user}} has no projects yet. </p>
+    {% endif %}
     {% if request.user == user %}
         <div class="project-create">
             <a class="btn btn-outline-primary mx-auto" href="{% url 'projects_create' %}"><i class="fas fa-plus"></i> Project</a>
