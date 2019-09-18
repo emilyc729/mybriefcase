@@ -34,15 +34,26 @@
             <a class="navbar-brand" href="{% url 'home' %}"><i class="fas fa-briefcase"></i> Briefcase</a>
             <ul class="navbar-nav ml-auto" id="nav-components">
                 <li class="nav-item">
-                    <form class="form-inline my-2 my-lg-0" method="get" action="">
+    
+                    {% if request.path == '/' or request.path == '/search/' %}
+                    <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'search_portfolios' %}">
                         {% csrf_token %}
-                        <input class="form-control mr-1" name="search_content" type="search" placeholder="Search" aria-label="Search">
-                        <select class="custom-select custom-select-md mr-2" name="option"  required>
+                        <input class="form-control mr-1" name="search_content" type="search" placeholder="Search Portfolios" aria-label="Search">
+                        <select class="custom-select custom-select-md mr-2" name="option" required>
                                 <option value="profession" selected>profession</option>
                                 <option value="technologies">technologies</option>
-                            </select>
+                        </select>
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                     </form>
+                    {% endif %}
+                   
+                    {% if 'profile' in request.path or user.id|stringformat:"i" in request.path %}
+                    <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'search_projects' user.id %}">
+                        {% csrf_token %}
+                        <input class="form-control mr-1" name="search_content" type="search" placeholder="Search by techs" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                    {% endif %}
                 </li>
                 {% if request.user.is_authenticated %}
                 <div class="btn-group">
