@@ -165,15 +165,12 @@ def search_portfolios(request):
             for proj in p.project_set.all():
                 projects.append(proj)
             users.append(p.user)
-        print(projects)
-        print(users)
         return render(request, 'home.html', {'users':users, 'projects':projects, 'portfolios':portfolios})
     if option == 'technologies' and search_content:
         projects = Project.objects.filter(technologies__icontains=search_content)
         plist = []
         ulist = []
         for p in projects:
-            print(p.portfolio)
             plist.append(p.portfolio)
             ulist.append(p.portfolio.user)
       
