@@ -17,7 +17,7 @@ BUCKET = 'dogcollector-ec'
 
 def home(request):
     users = User.objects.all()
-   
+
     for u in users:
         if Portfolio.objects.filter(user_id=u.id).exists():
             projects = Project.objects.all().order_by('date')
@@ -158,8 +158,16 @@ def search_portfolios(request):
     search_content = request.GET.get('search_content')
     option = request.GET.get('option')
     if option == 'profession' and search_content:
-         portfolios = Portfolio.objects.filter(profession__icontains=search_content)
-         return render(request, 'home.html', {'portfolios':portfolios})
+        portfolios = Portfolio.objects.filter(profession__icontains=search_content)
+        users = []
+        projects = []
+        for p in portfolios:
+            for proj in p.project_set.all():
+                projects.append(proj)
+            users.append(p.user)
+        print(projects)
+        print(users)
+        return render(request, 'home.html', {'users':users, 'projects':projects, 'portfolios':portfolios})
     if option == 'technologies' and search_content:
         projects = Project.objects.filter(technologies__icontains=search_content)
         plist = []
