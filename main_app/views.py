@@ -87,7 +87,6 @@ class ProjectCreate(LoginRequiredMixin, CreateView):
         'deployed_link',
         'project_link',
         'description',
-        'date'
     ]
 
     def get_success_url(self):
@@ -95,6 +94,7 @@ class ProjectCreate(LoginRequiredMixin, CreateView):
         return reverse('user_profile', kwargs={'user_id': user_id})
  
     def form_valid(self, form):
+        form.instance.date = self.request.POST['date']
         form.instance.portfolio = self.request.user.portfolio
         return super().form_valid(form)
 
