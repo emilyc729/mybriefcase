@@ -46,7 +46,7 @@
             {% for p in projects %}
             <div class="col-md-6 mb-4">
                 <div class="card">
-                    {% if user.portfolio.photo_url %}
+                    {% if p.photo_url %}
                         <img class="responsive-img card-img-top" id="project-img" src="{{p.photo_url}}" alt="Project Photo">
                     {% else %}
                         <img class="responsive-img " src="" alt="Project_Photo">
@@ -88,7 +88,11 @@
     </div>
 </div>
 <div class="jumbotron d-flex flex-column align-items-center">
+    {% if 'search' in request.path %}
+        <p class="text-center">No projects found. </p>
+    {% else %}
     <p class="text-center">{{user}} has no projects yet. </p>
+    {% endif %}
     {% if request.user == user %}
         <div class="project-create">
             <a class="btn btn-outline-primary mx-auto" href="{% url 'projects_create' %}"><i class="fas fa-plus"></i> Project</a>

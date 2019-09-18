@@ -13,7 +13,8 @@ urlpatterns = [
     path('projects/<int:pk>/delete/', views.ProjectDelete.as_view(), name='projects_delete'),
     path('projects/<int:projects_id>/add_photo/', views.projects_add_photo, name='projects_add_photo'),
     path('projects/<int:projects_id>/delete_photo/', views.projects_delete_photo, name='projects_delete_photo'),
-    path('search/', views.search, name='search'),
+    path('search/', views.search_portfolios, name='search_portfolios'),
+    path('search/<int:user_id>/', views.search_projects, name='search_projects'),
     path('accounts/login/', views.MyLoginView.as_view(), name ='login'),
     path('accounts/signup', views.signup, name='signup')
 ]

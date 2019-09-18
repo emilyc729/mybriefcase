@@ -17,14 +17,19 @@ BUCKET = 'dogcollector-ec'
 
 def home(request):
     users = User.objects.all()
-    return render(request, 'home.html', {'users': users})
+
+    for u in users:
+        if Portfolio.objects.filter(user_id=u.id).exists():
+            projects = Project.objects.all().order_by('date')
+            portfolios = Portfolio.objects.all()
+    return render(request, 'home.html', {'users': users, 'projects':projects, 'portfolios':portfolios})
+          
 
 def user_profile(request, user_id):
     user = User.objects.get(id=user_id)
     if Portfolio.objects.filter(user_id=user.id).exists():
         portfolio_id = user.portfolio
         projects = Project.objects.filter(portfolio=portfolio_id).order_by('date')
-        print(projects)
         return render(request, 'main_app/user_profile.html', {'user': user, 'projects':projects})
     else:
         return render(request, 'main_app/user_profile.html', {'user': user})
@@ -149,20 +154,36 @@ def projects_delete_photo(request, projects_id):
     projects.save()
     return redirect('user_profile', user)
 
-def search(request):
-    pass
-    # search_content = request.GET.get('content')
-    # option = request.GET.get('option')
-    # error_msg = ''
-    # if not content:
-    #     error_msg = 'Please enter search term'
-    #     return render(request, 'main_app/user_profile')
+def search_portfolios(request):
+    search_content = request.GET.get('search_content')
+    option = request.GET.get('option')
+    if option == 'profession' and search_content:
+        portfolios = Portfolio.objects.filter(profession__icontains=search_content)
+        users = []
+        projects = []
+        for p in portfolios:
+            for proj in p.project_set.all():
+                projects.append(proj)
+            users.append(p.user)
+        return render(request, 'home.html', {'users':users, 'projects':projects, 'portfolios':portfolios})
+    if option == 'technologies' and search_content:
+        projects = Project.objects.filter(technologies__icontains=search_content)
+        plist = []
+        ulist = []
+        for p in projects:
+            plist.append(p.portfolio)
+            ulist.append(p.portfolio.user)
+      
+        portfolios = set(plist)
+        users = set(ulist)
+        return render(request, 'home.html', {'users':users, 'projects':projects, 'portfolios':portfolios})
 
-    # search by 📔 
-    # get technologies
-    # then get profolio objects
-    # projects = Project.objects.filter(contain: technologies)
-    # for project in projects
+def search_projects(request, user_id):
+    search_content = request.GET.get('search_content')
+    user = User.objects.get(id=user_id)
+    projects = Project.objects.filter(technologies__icontains=search_content, portfolio=user.portfolio)
+    return render(request, 'main_app/user_profile.html', {'user': user, 'projects':projects})
+
 
 class MyLoginView(LoginView):
     def get_success_url(self):
