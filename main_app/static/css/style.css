@@ -144,11 +144,9 @@ hr {
 
 .jumbotron {
     background-color: mintcream;
-    margin: 0;
+    margin: 0 auto;
     padding-top: 15px;
 }
-
-
 
 
 /* Home page */
