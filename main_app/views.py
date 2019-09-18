@@ -17,12 +17,12 @@ BUCKET = 'dogcollector-ec'
 
 def home(request):
     users = User.objects.all()
-    projects = {}
+   
     for u in users:
         if Portfolio.objects.filter(user_id=u.id).exists():
             projects = Project.objects.all().order_by('date')
-
-    return render(request, 'home.html', {'users': users, 'projects':projects})
+            portfolios = Portfolio.objects.all()
+    return render(request, 'home.html', {'users': users, 'projects':projects, 'portfolios':portfolios})
           
 
 def user_profile(request, user_id):
@@ -154,20 +154,31 @@ def projects_delete_photo(request, projects_id):
     projects.save()
     return redirect('user_profile', user)
 
-def search(request):
-    pass
-    # search_content = request.GET.get('content')
-    # option = request.GET.get('option')
-    # error_msg = ''
-    # if not content:
-    #     error_msg = 'Please enter search term'
-    #     return render(request, 'main_app/user_profile')
+def search_portfolios(request):
+    search_content = request.GET.get('search_content')
+    option = request.GET.get('option')
+    if option == 'profession' and search_content:
+         portfolios = Portfolio.objects.filter(profession__icontains=search_content)
+         return render(request, 'home.html', {'portfolios':portfolios})
+    if option == 'technologies' and search_content:
+        projects = Project.objects.filter(technologies__icontains=search_content)
+        plist = []
+        ulist = []
+        for p in projects:
+            print(p.portfolio)
+            plist.append(p.portfolio)
+            ulist.append(p.portfolio.user)
+      
+        portfolios = set(plist)
+        users = set(ulist)
+        return render(request, 'home.html', {'users':users, 'projects':projects, 'portfolios':portfolios})
 
-    # search by 📔 
-    # get technologies
-    # then get profolio objects
-    # projects = Project.objects.filter(contain: technologies)
-    # for project in projects
+def search_projects(request, user_id):
+    search_content = request.GET.get('search_content')
+    user = User.objects.get(id=user_id)
+    projects = Project.objects.filter(technologies__icontains=search_content, portfolio=user.portfolio)
+    return render(request, 'main_app/user_profile.html', {'user': user, 'projects':projects})
+
 
 class MyLoginView(LoginView):
     def get_success_url(self):
