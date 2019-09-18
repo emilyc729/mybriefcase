@@ -17,14 +17,19 @@ BUCKET = 'dogcollector-ec'
 
 def home(request):
     users = User.objects.all()
-    return render(request, 'home.html', {'users': users})
+    projects = {}
+    for u in users:
+        if Portfolio.objects.filter(user_id=u.id).exists():
+            projects = Project.objects.all().order_by('date')
+
+    return render(request, 'home.html', {'users': users, 'projects':projects})
+          
 
 def user_profile(request, user_id):
     user = User.objects.get(id=user_id)
     if Portfolio.objects.filter(user_id=user.id).exists():
         portfolio_id = user.portfolio
         projects = Project.objects.filter(portfolio=portfolio_id).order_by('date')
-        print(projects)
         return render(request, 'main_app/user_profile.html', {'user': user, 'projects':projects})
     else:
         return render(request, 'main_app/user_profile.html', {'user': user})
