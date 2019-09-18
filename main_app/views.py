@@ -17,7 +17,8 @@ BUCKET = 'dogcollector-ec'
 
 def home(request):
     users = User.objects.all()
-
+    projects = {}
+    portfolios = {}
     for u in users:
         if Portfolio.objects.filter(user_id=u.id).exists():
             projects = Project.objects.all().order_by('date')
