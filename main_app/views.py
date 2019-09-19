@@ -118,6 +118,10 @@ class ProjectUpdate(LoginRequiredMixin, UpdateView):
         user_id = self.request.user.id
         return reverse('user_profile', kwargs={'user_id': user_id})
 
+    def form_valid(self, form):
+        form.instance.date = self.request.POST['date']
+        return super().form_valid(form)
+
 class ProjectDelete(LoginRequiredMixin, DeleteView):
     model = Project
     template_name = "main_app/projects_confirm_delete.html"
