@@ -192,8 +192,12 @@ hr {
 
 .carousel-inner {
     background-color: white;
-    height: 560px;
 }
+
+.carousel-item {
+    margin-bottom: 68px;
+}
+
 
 .carousel-item img {
     object-fit: scale-down;
