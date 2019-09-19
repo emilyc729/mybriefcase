@@ -14,6 +14,10 @@ After signup, the homepage shows a carousel of project photos - assuming there h
 
 <img src="https://github.com/brownbugz/mybriefcase/blob/sonnia_readme/images/Screen%20Shot%202019-09-18%20at%204.58.20%20PM.png" width="600">
 
+To view more of the homepage, scroll down and see the User Portfolio.
+
+<img src="https://github.com/brownbugz/mybriefcase/blob/sonnia_readme/images/Screen%20Shot%202019-09-18%20at%204.58.50%20PM.png" width="600">
+
 ---
 
 ## Technologies Used
