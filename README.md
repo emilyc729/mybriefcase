@@ -1,11 +1,16 @@
-### Briefcase
+# Briefcase
+
 ( link to deployed app )
-( images from deployed site )
-<img src="" alt="">
 
-Briefcase is a place to post and view web developer portfolios. Users can search based on profession or technologies.
+<img src="https://github.com/brownbugz/mybriefcase/blob/sonnia_readme/images/Screen%20Shot%202019-09-18%20at%204.58.20%20PM.png" width="600">
 
-### Technologies (Languages & Frameworks)
+<img src="https://github.com/brownbugz/mybriefcase/blob/sonnia_readme/images/Screen%20Shot%202019-09-18%20at%204.58.50%20PM.png" width="600">
+
+Briefcase is an app where a user can share projects in a portfolio. The projects are viewable by all users of the app. The user is the only one who can edit and delete their projects. It is a great app to use for job interviews or simply networking your accomplishments.
+
+---
+
+## Technologies (Languages & Frameworks)
 * Python
 * PostgreSQL
 * Django
@@ -14,49 +19,11 @@ Briefcase is a place to post and view web developer portfolios. Users can search
 * CSS
 * Bootstrap
 * JavaScript
-
-### Links
-Pitch Deck: [Pitch Deck](https://docs.google.com/presentation/d/1jolAxNPYoJfQYPciF4GNPTOVhBDfapgCSL6-MbOB6bo/edit?usp=sharing)
-Tello Board: [Trello Board](https://trello.com/b/jD2WqWJw/project3-mybriefcase)
-
-
-### Future Enhancements
-
---------SONNIA's README---------
-
-## Description
-
-Briefcase is an app where a user can share projects in a portfolio. The projects are viewable by all users of the app. The user is the only one who can edit and delete their projects. It is a great app to use for job interviews or simply networking your accomplishments.
-
----
-
-## Screenshots
-
-After signup, the homepage shows a carousel of project photos - assuming there have been users who have created portfolios and uploaded project info.
-
-<img src="https://github.com/brownbugz/mybriefcase/blob/sonnia_readme/images/Screen%20Shot%202019-09-18%20at%204.58.20%20PM.png" width="600">
-
-To view more of the homepage, scroll down and see the User Portfolio.
-
-<img src="https://github.com/brownbugz/mybriefcase/blob/sonnia_readme/images/Screen%20Shot%202019-09-18%20at%204.58.50%20PM.png" width="600">
-
----
-
-## Technologies Used
-
-* HTML
-* CSS
-* JavaScript
-* Bootstrap
-* Python3
-* Django
 * Heroku
 
 ---
 
 ## Getting Started
-
-Game Link to be added here
 
 * User signs up and logs in
 * User creates a portfolio/profile
@@ -67,9 +34,21 @@ Game Link to be added here
 
 ---
 
-## Next Steps
+## Links
+Pitch Deck: [Pitch Deck](https://docs.google.com/presentation/d/1jolAxNPYoJfQYPciF4GNPTOVhBDfapgCSL6-MbOB6bo/edit?usp=sharing)
+
+Tello Board: [Trello Board](https://trello.com/b/jD2WqWJw/project3-mybriefcase)
 
 ---
+
+## Future Enhancements
+
+* Allows Users to modify portfolio structure and use a color theme on their portfolio to customize it
+* Allow to upload a demo video instead of image
+
+---
+
+
 
 
 
