@@ -243,10 +243,12 @@ hr {
     width: 140px;
 }
 
-#project-img {
+.project-img {
     object-fit: cover;
     height: 290px;
-    background: black;
+    font-size: 4em;
+    border-bottom: 1px solid var(--blue);
+    color: var(--blue);
 }
 
 
