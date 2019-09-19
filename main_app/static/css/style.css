@@ -137,7 +137,9 @@ nav {
     padding:.5rem 0 0 0;
 }
 
-
+.navbar-nav .dropdown-menu {
+    position: absolute;
+}
 
 
 hr {
