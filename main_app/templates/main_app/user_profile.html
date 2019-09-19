@@ -3,8 +3,8 @@
 
 {% if user.portfolio %}
 <div class="jumbotron" id="profile">
-    <div class="row">
-        <div class="col-md-1"></div>
+    <div class="row" id="profile-row">
+        <div class="col-1"></div>
         <div class="col-sm-12 col-md-5">
             <h1 class="display-4" id="username">{{user.first_name}} {{user.last_name}} <small
                     class="text-muted">({{user.username}})</small>
@@ -22,8 +22,7 @@
                 <img class="responsive-img mb-4" id="profile-img" src="{{user.portfolio.photo_url}}" alt="Avatar">
             </div>
             {% else %}
-            <div class="responsive-img mb-4 profile-icon d-flex align-items-center justify-content-center"><i
-                    class="fas fa-user"></i></div>
+            <div class="responsive-img mb-4 profile-icon d-flex align-items-center justify-content-center"><i class="fas fa-user"></i></div>
             {% endif %}
 
             {% if request.user == user %}
@@ -57,51 +56,43 @@
     <div class="row">
 
         {% if projects %}
-        {% for p in projects %}
-        <div class="col-md-6 mb-4">
-            <div class="card">
-                {% if p.photo_url %}
-                <img class="responsive-img card-img-top" id="project-img" src="{{p.photo_url}}" alt="Project Photo">
-                {% else %}
-                <div
-                    class="responsive-img card-img-top d-flex align-items-center justify-content-center" id="project-img">
-                    <i class="fas fa-camera"></i>
-                </div>
-                {% endif %}
-                <div id="project-info">
-                    {% if request.user == user %}
-                    <a class="btn btn-outline-primary edit-photo" data-toggle="collapse"
-                        data-target="#img-upload{{p.id}}">Edit Photo</a>
-                    <form method="POST" action="{% url 'projects_add_photo' p.id %}" enctype="multipart/form-data"
-                        id="img-upload{{p.id}}" class="collapse photo-form">
-                        {% csrf_token %}
-                        <input type="file" name="photo-file">
-                        <br>
-                        <input type="submit" class="btn btn-outline-success mt-2" value="Upload Photo">
-                        <a class="btn btn-outline-danger mt-2" href="{% url 'projects_delete_photo' p.id %}">Delete
-                            Photo</a>
-                    </form>
+            {% for p in projects %}
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    {% if p.photo_url %}
+                        <img class="responsive-img card-img-top project-img" src="{{p.photo_url}}" alt="Project Photo">
+                    {% else %}
+                        <div class="responsive-img mb-4 d-flex align-items-center justify-content-center project-img"><i class="fas fa-image"></i></div>
                     {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{p.project_name}}</h5>
-                        <p class="card-text">{{p.description}}</p>
-                        <p class="card-text">Technologies Used: {{p.technologies}}</p>
-                        <div>
-                            <a class="btn btn-outline-primary" href="{{p.project_link}}">Github</a>
-                            <a class="btn btn-outline-primary" href="{{p.deployed_link}}">Live Project</a>
+                        <div id="project-info">
+                            {% if request.user == user %}
+                                <a class="btn btn-outline-primary edit-photo" data-toggle="collapse" data-target="#img-upload{{p.id}}">Edit Photo</a>
+                                <form method="POST" action="{% url 'projects_add_photo' p.id %}" enctype="multipart/form-data" id="img-upload{{p.id}}" class="collapse photo-form" >
+                                    {% csrf_token %}
+                                    <input type="file" name="photo-file">
+                                    <br>
+                                    <input type="submit" class="btn btn-outline-success mt-2" value="Upload Photo">
+                                    <a class="btn btn-outline-danger mt-2" href="{% url 'projects_delete_photo' p.id %}">Delete Photo</a>
+                                </form>
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{p.project_name}}</h5>
+                                <p class="card-text">{{p.description}}</p>
+                                <p class="card-text">Technologies Used: {{p.technologies}}</p>
+                                <div>
+                                    <a class="btn btn-outline-primary" href="{{p.project_link}}">Github</a>
+                                    <a class="btn btn-outline-primary" href="{{p.deployed_link}}">Live Project</a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="card-footer d-flex justify-content-between">
-                    <p class="text-muted">Project Completed: {{p.date}}</p>
-                    {% if request.user == user %}
-                    <div>
-                        <a href="{% url 'projects_update' p.id %}"><button
-                                class="btn btn-outline-info">Edit</button></a>
-                        <a href="{% url 'projects_delete' p.id %}"><button
-                                class="btn btn-outline-danger">Delete</button></a>
-                    </div>
-                    {% endif %}
+                        <div class="card-footer d-flex justify-content-between">
+                            <p class="text-muted">Project Completed: {{p.date}}</p>
+                            {% if request.user == user %}
+                            <div>
+                                <a href="{% url 'projects_update' p.id %}"><button class="btn btn-outline-info">Edit</button></a>
+                                <a href="{% url 'projects_delete' p.id %}"><button class="btn btn-outline-danger">Delete</button></a>
+                            </div>
+                        {% endif %}
                 </div>
             </div>
         </div>
