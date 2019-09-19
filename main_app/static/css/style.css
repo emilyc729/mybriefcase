@@ -223,6 +223,10 @@ hr {
     display: flex;
 }
 
+#profile-row {
+    width: 100%;
+}
+
 #username {
     padding: 0px;
 }
