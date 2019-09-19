@@ -37,17 +37,18 @@
                     </div>
                     {% for user in users %}
                     {% if user.portfolio %}
-
                     {% for p in projects %}
-
-                    <div class="carousel-item">
-                        <img src="{{p.photo_url}}" class="d-block w-100" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>{{p.project_name}}</h5>
-                            <p>By {{p.portfolio.user}}</p>
+                    
+                        <div class="carousel-item">
+                            <a href="{% url 'user_profile' p.portfolio.user.id %}">
+                                <img src="{{p.photo_url}}" class="d-block w-100" alt="...">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>{{p.project_name}}</h5>
+                                    <p>By {{p.portfolio.user}}</p>
+                                </div>
+                            </a>
                         </div>
-                    </div>
-
+                    
                     {% endfor %}
                     {% endif %}
                     {% endfor %}
@@ -96,11 +97,16 @@
             </div>
         </div>
         {% endif %}
+        {% empty %}
+            {% if 'search' in request.path %}
+            <p class="text-center">No portfolios found. </p>
+            {% else %}
+            <p class="text-center">There are no users with portfolios yet. </p>
+            {% endif %}
+        
         {% endfor %}
         
     </div>
-    {% else %}
-    <h2>There are no users with portfolios</h2>
     {% endif %}
 </div>
 
