@@ -10,7 +10,9 @@ Briefcase is an app where a user can share projects in a portfolio. The projects
 
 ## Screenshots
 
-Photos to be added 
+After signup, the homepage shows a carousel of project photos - assuming there have been users who have created portfolios and uploaded project info.
+
+<img src="https://github.com/brownbugz/slotmachine/blob/master/images/slot1.png" width="600">
 
 ---
 
