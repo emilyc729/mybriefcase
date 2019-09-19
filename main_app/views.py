@@ -13,7 +13,7 @@ import uuid
 import boto3
 
 S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
-BUCKET = 'proj3mybriefcase'
+BUCKET = 'dogcollector-ec'
 
 def home(request):
     users = User.objects.all()
