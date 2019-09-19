@@ -112,7 +112,6 @@ class ProjectUpdate(LoginRequiredMixin, UpdateView):
         'deployed_link',
         'project_link',
         'description',
-        'date'
     ]
 
     def get_success_url(self):

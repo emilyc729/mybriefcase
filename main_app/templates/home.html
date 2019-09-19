@@ -97,11 +97,16 @@
             </div>
         </div>
         {% endif %}
+        {% empty %}
+            {% if 'search' in request.path %}
+            <p class="text-center">No portfolios found. </p>
+            {% else %}
+            <p class="text-center">There are no users with portfolios yet. </p>
+            {% endif %}
+        
         {% endfor %}
         
     </div>
-    {% else %}
-    <h2>There are no users with portfolios</h2>
     {% endif %}
 </div>
 
