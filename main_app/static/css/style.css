@@ -142,7 +142,6 @@ nav {
     background-color: var(--firstblue);
 }
 
-
 .navbar {
     box-shadow: 0 2px 4px -1px rgba(0,0,0,0.25);
     border-radius: 10px;
@@ -154,6 +153,10 @@ nav {
 
 #sign-up {
     min-width: 90px;
+}
+
+.navbar-nav .dropdown-menu {
+    position: absolute;
 }
 
 hr {
