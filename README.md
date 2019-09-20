@@ -2,7 +2,7 @@
 
 [Briefcase](https://ess-mybriefcase.herokuapp.com/)
 
-<img src="https://i.imgur.com/aSNjFNqt.png" width="400"> <img src="https://i.imgur.com/gYq8vdAt.png" width="400">
+<img src="https://i.imgur.com/aSNjFNqt.png"> <img src="https://i.imgur.com/gYq8vdAt.png">
 
 
 Briefcase is an app where a user can share projects in a portfolio. The projects are viewable by all users of the app. The user is the only one who can edit and delete their projects. It is a great app to use for job interviews or simply networking your accomplishments.
