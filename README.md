@@ -3,7 +3,7 @@
 [Briefcase](https://ess-mybriefcase.herokuapp.com/)
 
 Home Page:
-<img src="https://i.imgur.com/aSNjFNq.png">
+<img src="https://i.imgur.com/mMoGRtQ.png">
 User Portfolio:
 <img src="https://i.imgur.com/74aFkf2.png">
 
