@@ -181,11 +181,14 @@ def search_portfolios(request):
         portfolios = set(plist)
         users = set(ulist)
         return render(request, 'home.html', {'users':users, 'projects':projects, 'portfolios':portfolios})
+    if not search_content:
+        return redirect('home')
+
 
 def search_projects(request, user_id):
     search_content = request.GET.get('search_content')
     user = User.objects.get(id=user_id)
-    projects = Project.objects.filter(technologies__icontains=search_content, portfolio=user.portfolio)
+    projects = Project.objects.filter(technologies__icontains=search_content, portfolio=user.portfolio).order_by('date')
     return render(request, 'main_app/user_profile.html', {'user': user, 'projects':projects})
 
 
